@@ -22,7 +22,7 @@ return new class extends Migration
             $table->String('order_address');
             $table->float('order_total_amount');
             $table->enum('order_status',['confirmed','prepared','on delivery']);
-            $table->enum('order_status',['paid','unpaid']);
+            $table->enum('order_payment_status',['paid','unpaid']);
             $table->timestamps();
         });
     }

@@ -12,11 +12,11 @@ class Food_item extends Model
     protected $fillable = [
         'kitchen_id',
         'category_id',
-        'itemName',
-        'itemPrice',
+        'item_name',
+        'item_price',
         'discount',
-        'itemImage',
-        'itemAvailability',
+        'item_image',
+        'item_availability',
     ];
 
     public function kitchen()

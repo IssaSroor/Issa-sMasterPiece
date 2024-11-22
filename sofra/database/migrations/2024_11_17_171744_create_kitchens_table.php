@@ -20,10 +20,13 @@ return new class extends Migration
             $table->String('kitchen_description');
             $table->String('kitchen_phone');
             $table->String('kitchen_address');
-            $table->String('kitchen_working_hours');
-            $table->enum('kitchen_status',['opened','closed','busy']);
-            $table->integer('kitchen_rating');
-            $table->bigInteger('accepted_by')->unsigned();
+            $table->String('kitchen_image');
+            $table->boolean('free_delivery');
+            $table->integer('time_for_delivery');
+            $table->enum('kitchen_status',['opened','closed','busy'])->default('closed');
+            $table->enum('kitchen_state',['pending','approved','rejected'])->default('pending');
+            $table->integer('kitchen_rating')->default(0);
+            $table->bigInteger('accepted_by')->unsigned()->nullable();
             $table->foreign('accepted_by')->references('id')->on('admins')->onDelete('cascade');
             $table->timestamps();
         });

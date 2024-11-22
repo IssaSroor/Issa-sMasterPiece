@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('client_email');
             $table->string('subject');
             $table->string('question');
-            $table->bigInteger('resolved_by')->unsigned();
+            $table->bigInteger('resolved_by')->unsigned()->nullable();
             $table->foreign('resolved_by')->references('id')->on('admins')->onDelete('cascade');
             $table->timestamps();
         });

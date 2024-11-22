@@ -12,8 +12,8 @@ class Message extends Model
     protected $fillable = [
         'customer_id',
         'kitchen_id',
-        'messageSubject',
-        'messageText',
+        'message_subject',
+        'message_text',
     ];
 
     public function customer()

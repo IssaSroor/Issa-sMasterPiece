@@ -13,8 +13,9 @@ class Kitchen_review extends Model
         'kitchen_id',
         'customer_id',
         'rating',
-        'reviewText',
+        'review_text',
         'accepted_by',
+        'review_status'
     ];
 
     public function kitchen()
@@ -22,8 +23,13 @@ class Kitchen_review extends Model
         return $this->belongsTo(Kitchen::class, 'kitchen_id');
     }
 
-    public function customer()
+    public function user()
     {
         return $this->belongsTo(User::class, 'customer_id');
     }
+    public function kitchens()
+    {
+        return $this->belongsTo(Kitchen::class, 'kitchen_id');
+    }
+    
 }

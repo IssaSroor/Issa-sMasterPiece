@@ -10,8 +10,8 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        'clientName',
-        'clientEmail',
+        'client_name',
+        'client_email',
         'subject',
         'question',
         'resolved_by',

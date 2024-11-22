@@ -22,7 +22,7 @@ return new class extends Migration
             $table->String('item_description');
             $table->float('item_price');
             $table->float('item_discount')->default(0);
-            $table->enum('item_availability',['available','Out of stock']);
+            $table->enum('item_availability',['available','Out of stock'])->default('available');
             $table->timestamps();
         });
     }

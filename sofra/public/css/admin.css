@@ -1,0 +1,489 @@
+:root {
+    --primary-color: #FF4500;
+    --secondary-color: #FFE4B5;
+    --accent-color: #FF6347;
+    --background-color: beige;
+    --text-color: #333333;
+    --hover-color: #FFB347;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.admin-sidebar {
+    background-color: var(--primary-color);
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    color: #fff;
+    overflow-y: auto;
+}
+
+.admin-sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.admin-sidebar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.admin-sidebar nav ul li a:hover {
+    background-color: var(--hover-color);
+}
+
+.admin-main-content {
+    margin-left: 250px;
+    padding: 1rem;
+}
+
+.admin-header {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+}
+
+.admin-header h1 {
+    margin-left: 20px ;
+}
+
+.admin-header .btn-logout {
+    background-color: var(--accent-color);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.admin-header .btn-logout:hover {
+    background-color: var(--hover-color);
+}
+
+.admin-content {
+    margin-top: 20px;
+}
+
+.container {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 30px;
+}
+
+h2 {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .admin-sidebar {
+        position: absolute;
+        width: 200px;
+        transform: translateX(-250px);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .admin-sidebar.active {
+        transform: translateX(0);
+    }
+
+    .admin-main-content {
+        margin-left: 0;
+    }
+}
+
+/* Orders Style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid var(--primary-color);
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: var(--background-color);
+}
+
+.btn {
+    padding: 5px 10px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+
+/* Reviews Style */
+.admin-reviews-container {
+    padding: 20px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+}
+
+.reviews-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.reviews-table th, .reviews-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.reviews-table th {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.approve-btn {
+    background-color: var(--hover-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.reject-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.kitchen-selection{
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 300px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Login Style */
+.login-container {
+    background-color: #fff;
+    color: var(--text-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+form div {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+input[type="file"],
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 94%;
+    padding: 0.75rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--background-color);
+}
+
+input[type="file"]:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.btn-info{
+    background-color: gray;
+}
+
+.btn-info:hover{
+    background-color: #333333;
+}
+.btn-success{
+    background-color: rgb(1, 190, 1);
+}
+
+.btn-success:hover{
+    background-color: rgb(1, 106, 1);
+}
+
+.btn-danger{
+    background-color: red;
+}
+
+.btn-danger:hover{
+    background-color: rgb(160, 2, 2);
+}
+
+.btn-warning{
+    background-color: #FFB347;
+}
+
+.btn-warning:hover{
+    background-color: #bd730c;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+textarea
+{
+   width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+
+button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
+
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.stat-card p {
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Style for the Admin Reviews Container */
+.admin-reviews-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for the kitchen selection dropdown and message */
+.kitchen-select-message {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Style for the kitchen select dropdown */
+.kitchen-select-dropdown {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 300px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Style the button when no kitchen is selected */
+.select-button {
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.select-button:hover {
+    background-color: #218838;
+}
+
+
+/* Style for the "Approve" and "Reject" buttons */
+.approve-btn, .reject-btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.approve-btn {
+    background-color: #28a745;
+}
+
+.reject-btn {
+    background-color: #dc3545;
+}
+
+.approve-btn:hover {
+    background-color: #218838;
+}
+
+.reject-btn:hover {
+    background-color: #c82333;
+}
+
+/* admins */
+
+.btn {
+    padding: 10px 15px;
+    text-decoration: none;
+    margin-right: 10px;
+    border-radius: 4px;
+
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: #fff;
+    display: inline-block;
+    margin: 15px 0;
+}
+
+form {
+    margin: 15px 0;
+}
+
+

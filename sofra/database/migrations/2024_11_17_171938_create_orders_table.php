@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreign('managed_by')->references('id')->on('admins')->onDelete('cascade');
             $table->String('order_address');
             $table->float('order_total_amount');
-            $table->enum('order_status',['confirmed','prepared','on delivery']);
-            $table->enum('order_payment_status',['paid','unpaid']);
+            $table->enum('order_status',['confirmed','prepared','on delivery'])->default('confirmed');
+            $table->enum('order_payment_status',['paid','unpaid'])->default('unpaid');
             $table->timestamps();
         });
     }

@@ -10,18 +10,18 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'customer_id',
         'kitchen_id',
-        'orderTotalAmount',
+        'order_total_amount',
         'deliveryAddress',
-        'orderStatus',
-        'orderPaymentStatus',
+        'order_status',
+        'order_payment_status',
         'managed_by',
     ];
 
     public function customer()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'customer_id'); 
     }
 
     public function kitchen()

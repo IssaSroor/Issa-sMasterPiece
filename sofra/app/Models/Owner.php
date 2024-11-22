@@ -10,10 +10,10 @@ class Owner extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ownerName',
-        'ownerEmail',
-        'ownerPassword',
-        'ownerAddress',
+        'owner_name',
+        'owner_email',
+        'owner_password',
+        'owner_address',
     ];
 
     public function kitchen()

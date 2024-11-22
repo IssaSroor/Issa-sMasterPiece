@@ -10,9 +10,8 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'categoryName',
-        'categoryImage',
-        'created_by',
+        'category_name',
+        'category_image',
     ];
 
     public function kitchens()

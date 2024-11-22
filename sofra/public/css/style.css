@@ -1,0 +1,596 @@
+/* nav style */
+:root{
+    --primary-color: #FF4500;
+    --secondary-color: #FFE4B5;
+    --accent-color: #FF6347;
+    --background-color: beige;
+    --text-color: #333333;
+    --hover-color: #FFB347;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color); /* OrangeRed */
+    color: var(--secondary-color); /* Moccasin */
+    height: 70px;
+}
+.respon{
+    display: block;
+}
+.logo{
+    color: var(--secondary-color);
+    font-size: 9mm;
+    padding-left: 10px;
+}
+.navbar a {
+    color: var(--secondary-color); /* Matches navbar text */
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navbar a:hover {
+    color: var(--hover-color);
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar-links li {
+    margin: 0 10px;
+}
+
+.navbar-user {
+    display: flex;
+    align-items: center;
+}
+.container2{
+    display: flex;
+}
+.dropdown-form {
+    display: none;
+    margin: 0;
+}
+
+.dropdown-form select {
+    padding: 10px;
+    background-color: var(--primary-color); /* OrangeRed */
+    color: var(--secondary-color);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-form select:focus {
+    outline: none;
+}
+@media (max-width: 768px) {
+    .respon{
+     display: none;
+    }
+    .dropdown-form{
+     display: block;
+    }
+ }
+
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: #000;
+}
+h3{
+    color: var(--primary-color);
+
+}
+h2{
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 90px;
+}
+
+button {
+    background-color: var(--primary-color); /* Orange */
+    color: var(--secondary-color); /* Moccasin */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--hover-color); /* Button hover */
+}
+
+.error {
+    color: var(--accent-color);
+}
+
+.success {
+    color: var(--primary-color);
+}
+
+input {
+    border: 1px solid #FF4500;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+input:focus {
+    border-color: #FF6347;
+    outline: none;
+}
+
+/* Hero Slider */
+#hero-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 2s ease-in-out;
+    width: 100%;
+}
+
+.slide {
+    flex: 0 0 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.overlay {
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    padding: 30px;
+}
+
+.overlay h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.overlay p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color); /* Orange */
+    color: var(--secondary-color); /* Moccasin */
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+.cta-button:hover {
+    background-color: var(--hover-color); /* OrangeRed */
+    color: var(--secondary-color);
+}
+
+/* Kitchen Grid */
+/* Section Styling */
+#new-kitchens {
+    padding: 50px 0;
+    background-color: #f9f9f9; /* Light background color */
+    text-align: center;
+}
+
+#new-kitchens h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Kitchen Grid Styling */
+.kitchen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Grid with flexible columns */
+    gap: 20px;
+    justify-items: center;
+}
+
+/* Individual Kitchen Card Styling */
+.kitchen-card1 {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kitchen-card1:hover {
+    transform: translateY(-5px); /* Lift the card slightly on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Add more shadow on hover */
+}
+
+.kitchen-card1 img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Ensures the image covers the space */
+    border-bottom: 1px solid #ddd; /* Border between image and content */
+}
+
+.kitchen-card1 h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 20px 0 10px;
+}
+
+.kitchen-card1 p {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.kitchen-card1 .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--accent-color); /* Green button */
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.kitchen-card1 .btn:hover {
+    background-color: var(--hover-color); /* Darker shade on hover */
+}
+
+/* contact us */
+.contact-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.contact-form h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 2rem;
+}
+
+.contact-form .alert {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    color: #155724;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.2rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: #fff;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #1f1f7a;
+    outline: none;
+    box-shadow: 0 0 4px rgba(31, 31, 122, 0.4);
+}
+
+.contact-form .btn-submit {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-form .btn-submit:hover {
+    background: var(--hover-color);
+}
+
+/* kitchen page */
+
+.kitchen-banner {
+    position: relative;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kitchen-banner .overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.kitchen-banner h1 {
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+.kitchen-details .kitchen-header {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.kitchen-details .kitchen-header .rating {
+    margin: 0.5rem 0;
+    font-weight: bold;
+    color: #ffa500;
+}
+
+.kitchen-details .kitchen-header .btn {
+    background-color: #1f1f7a;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.kitchen-description {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.best-sellers .product-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.best-sellers .product-card {
+    width: calc(25% - 1rem);
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.best-sellers .product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.reviews .review-card {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+/* all kitchens page */
+
+.filters-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.filters-container .btn {
+    margin: 5px;
+}
+
+.kitchen-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.kitchen-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.kitchen-card .kitchen-image img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.kitchen-card .kitchen-details {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.kitchen-card .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.kitchen-card .bottom-row {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.kitchen-card .rating {
+    color: #f39c12;
+}
+
+.kitchen-card .badge-success {
+    color: #fff;
+    background-color: #28a745;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+.kitchen-card .discount {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+
+/* Footer Styles */
+footer {
+    background-color: var(--primary-color); /* OrangeRed */
+    color: var(--secondary-color); /* Moccasin */
+    padding: 40px 20px;
+    font-size: 14px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-logo h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--secondary-color); /* Highlighted logo color */
+}
+
+.footer-logo p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--secondary-color); /* Subtle contrasting color */
+}
+
+.footer-links h4, 
+.footer-contact h4, 
+.footer-social h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: var(--secondary-color); /* Highlighted headings */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: var(--secondary-color); /* White text for links */
+    transition: color 0.3s;
+}
+
+ul li a:hover {
+    color: var(--hover-color); /* Highlight color on hover */
+}
+
+.footer-social ul {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-social ul li a {
+    display: inline-block;
+    padding: 10px;
+    background-color: var(--primary-color); /* OrangeRed */
+    color: var(--secondary-color); /* Moccasin */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.footer-social ul li a:hover {
+    background-color: var(--hover-color); /* Light Orange */
+    color: var(--primary-color); /* OrangeRed */
+}
+
+.copyright {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
+    color: var(--secondary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-logo,
+    .footer-links,
+    .footer-contact,
+    .footer-social {
+        text-align: center;
+    }
+
+    .footer-social ul {
+        justify-content: center;
+    }
+}
+
+

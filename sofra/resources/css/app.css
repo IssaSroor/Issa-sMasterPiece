@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Register Page Styles */
+.register-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    
+}
+
+.register-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #32657C; /* Teal color */
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #32657C; /* Teal border */
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #32657C; /* Darker Teal for focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.5);
+}
+
+.error-message {
+    color: #d32f2f; /* Red color for error messages */
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.login-link {
+    color: #32657C; /* Teal for the link */
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+.register-button {
+    background-color: #32657C; /* Teal button */
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.register-button:hover {
+    background-color: #FFE75D; /* Darker Teal on hover */
+}
+

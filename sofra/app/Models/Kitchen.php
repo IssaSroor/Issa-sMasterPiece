@@ -11,16 +11,22 @@ class Kitchen extends Model
 
     protected $fillable = [
         'owner_id',
-        'kitchenName',
-        'kitchenShortDesc',
-        'kitchenDescription',
-        'kitchenPhoneNumber',
-        'kitchenRating',
-        'kitchenAddress',
-        'kitchenStatus',
-        'kitchenWorkingHours',
+        'kitchen_name',
+        'kitchen_short_desc',
+        'kitchen_description',
+        'kitchen_phone',
+        'kitchen_rating',
+        'kitchen_address',
+        'kitchen_status',
+        'kitchen_state',
+        'kitchen_working_hours',
+        'kitchen_image',
         'accepted_by',
     ];
+    public function getKitchenImageAttribute($value)
+    {
+        return $value ? 'storage/kitchens/' . $value : 'images/default-kitchen.jpg';
+    }
 
     public function owner()
     {
@@ -29,7 +35,7 @@ class Kitchen extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'kitchenCategories', 'kitchen_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'kitchen_categories', 'kitchen_id', 'category_id');
     }
 
     public function foodItems()
@@ -51,5 +57,9 @@ class Kitchen extends Model
     {
         return $this->hasMany(Message::class, 'kitchen_id');
     }
-    
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'accepted_by');
+    }
+
 }

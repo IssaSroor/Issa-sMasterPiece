@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('review_rating');  
             $table->bigInteger('accepted_by')->unsigned();  
             $table->foreign('accepted_by')->references('id')->on('admins')->onDelete('cascade');
+            $table->enum('review_status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

@@ -13,6 +13,6 @@ class KitchenSeeder extends Seeder
      */
     public function run(): void
     {
-        Kitchen::factory()->count(10)->create();
+        Kitchen::factory()->count(20)->create();
     }
 }

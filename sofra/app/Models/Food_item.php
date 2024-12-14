@@ -13,15 +13,16 @@ class Food_item extends Model
         'kitchen_id',
         'category_id',
         'item_name',
+        'item_description',
         'item_price',
-        'discount',
+        'item_discount',
         'item_image',
         'item_availability',
     ];
 
-    public function kitchen()
+    public function kitchens()
     {
-        return $this->belongsTo(Kitchen::class, 'kitchen_id');
+        return $this->belongsToMany(Kitchen::class, 'kitchen_food_items', 'item_id', 'kitchen_id');
     }
 
     public function category()

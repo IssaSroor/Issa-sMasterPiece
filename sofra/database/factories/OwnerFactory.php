@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +19,8 @@ class OwnerFactory extends Factory
     {
         return [
             'owner_name' => $this->faker->name(),
-            'owner_email' => $this->faker->unique()->safeEmail(),
-            'owner_password' => bcrypt('password'), // You can use any default password here
+            'email' => $this->faker->unique()->safeEmail(),
+            'password' => Hash::make('password'), // You can use any default password here
             'owner_address' => $this->faker->address(),
         ];
     }

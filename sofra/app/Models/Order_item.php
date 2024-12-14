@@ -16,9 +16,10 @@ class Order_item extends Model
         'price',
     ];
 
-    public function order()
+    public function orders()
     {
-        return $this->belongsTo(Order::class, 'order_id');
+        return $this->belongsToMany(Order::class, 'order_items', 'item_id', 'order_id')
+            ->withPivot('quantity', 'price');
     }
 
     public function foodItem()

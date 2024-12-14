@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\KitchenController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReviewController;
@@ -25,7 +26,47 @@ Route::get('/', [KitchenController::class, 'index'])->name('home');
 Route::get('kitchen/{id}', [KitchenController::class, 'show'])->name('kitchen.show');
 // Route::get('/kitchen/{id}/menu', [Controller::class, 'index'])->name('kitchen.menu');
 Route::get('allKitchens', [KitchenController::class, 'allKitchens'])->name('all');
+Route::get('/kitchen.register', [KitchenController::class, 'showRegistrationForm'])->name('kitchen.register.page');
+Route::post('/kitchen/register', [KitchenController::class, 'registerKitchen'])->name('kitchen.register.submit');
 
+Route::middleware(['auth:owner'])->group(function () {
+    Route::get('/kitchen/{id}/profile', [KitchenController::class, 'profile'])->name('kitchen.profile');
+    Route::get('/kitchen/{id}/orders', [KitchenController::class, 'orders'])->name('kitchen.orders');
+    Route::get('/kitchen/{id}/messages', [KitchenController::class, 'messages'])->name('kitchen.messages');
+    Route::get('/kitchen/{id}/items', [KitchenController::class, 'items'])->name('kitchen.items');
+    Route::get('/kitchen/{id}/edit', [KitchenController::class, 'edit'])->name('kitchen.edit'); // Edit form
+    Route::put('/kitchen/{id}/update', [KitchenController::class, 'update'])->name('kitchen.update'); // Update logic
+    Route::get('/kitchen/{id}/items/add', [KitchenController::class, 'addItem'])->name('kitchen.items.add');
+    Route::post('/kitchen/{id}/items/add', [KitchenController::class, 'storeItem'])->name('kitchen.items.store');
+
+    Route::get('/kitchen/{kitchen_id}/items/{item_id}', [KitchenController::class, 'showItem'])->name('kitchen.items.view');
+
+    // Route to edit a single item
+    Route::get('/kitchen/{kitchen_id}/items/{item_id}/edit', [KitchenController::class, 'editItem'])->name('kitchen.items.edit');
+
+    // Route to update the item (POST request)
+    Route::post('/kitchen/{kitchen_id}/items/{item_id}', [KitchenController::class, 'updateItem'])->name('kitchen.items.update');
+
+    // Route to delete an item
+    Route::delete('/kitchen/{kitchen_id}/items/{item_id}', [KitchenController::class, 'destroy'])->name('kitchen.items.delete');
+
+});
+
+Route::put('/owner/profile/{id}', [OwnerController::class, 'updateProfile'])->name('owner.profile.update');
+Route::get('/owner/profile/{id}', [OwnerController::class, 'profile'])->name('owner.profile');
+
+
+// Route to edit the order
+Route::get('/kitchen/{id}/orders/{order_id}/edit', [OrderController::class, 'edit'])
+    ->name('kitchen.orders.edit');
+
+// Route to view the order
+Route::get('/kitchen/{id}/orders/{order_id}/view', [OrderController::class, 'view'])
+    ->name('kitchen.orders.view');
+
+// Route to update the order status
+Route::put('/kitchen/{id}/orders/{order_id}/update', [OrderController::class, 'update'])
+    ->name('kitchen.orders.update');
 
 
 Route::get('questions', [QuestionController::class, 'index'])->name('show');
@@ -43,12 +84,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('owner')->group(function () {
+    Route::get('register', [OwnerController::class, 'showRegisterForm'])->name('owner.register');
+    Route::post('register', [OwnerController::class, 'register']);
+    Route::get('login', [OwnerController::class, 'showLoginForm'])->name('owner.login');
+    Route::post('login', [OwnerController::class, 'login']);
+    Route::post('logout', [OwnerController::class, 'logout'])->name('owner.logout');
+
+    Route::get('dashboard', [OwnerController::class, 'dashboard'])->name('owner.dashboard');
+});
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Admin login routes
     Route::get('login', [AdminAuthController::class, 'create'])->name('login');
     Route::post('login', [AdminAuthController::class, 'store'])->name('login');
-    Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout')->middleware('auth:admin');
+    Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
 
     // Admin dashboard and protected routes
     Route::middleware('auth:admin')->group(function () {

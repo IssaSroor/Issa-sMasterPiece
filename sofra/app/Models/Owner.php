@@ -3,21 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Owner extends Model
+class Owner extends Authenticatable
 {
     use HasFactory;
 
     protected $fillable = [
         'owner_name',
-        'owner_email',
-        'owner_password',
-        'owner_address',
+        'email',
+        'password',
+        'owner_address'
     ];
 
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+    // In App\Models\Owner.php
     public function kitchen()
     {
         return $this->hasOne(Kitchen::class, 'owner_id');
     }
+
 }

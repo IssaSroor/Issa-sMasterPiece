@@ -25,7 +25,7 @@ class KitchenFactory extends Factory
             'kitchen_description' => $this->faker->sentence,
             'kitchen_phone' => $this->faker->phoneNumber,
             'kitchen_address' => $this->faker->address,
-            'kitchen_image' => $this->faker->imageUrl(640, 480, 'food'), // Random image URL for kitchen image
+            'kitchen_image' => $this->faker->imageUrl('kitchen.jpg'),
             'free_delivery' => $this->faker->boolean, // Random true or false for free delivery
             'time_for_delivery' => $this->faker->numberBetween(15, 60), // Random delivery time between 15 and 60 minutes
             'kitchen_status' => $this->faker->randomElement(['opened', 'closed', 'busy']),

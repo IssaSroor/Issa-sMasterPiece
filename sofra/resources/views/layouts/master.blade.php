@@ -8,67 +8,34 @@
     <!-- Add your CSS files -->
     <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
     <!-- Header -->
     <header>
-        <nav class="navbar">
+        <nav class="custom-navbar">
             <div class="container">
-                <!-- Logo -->
-                <p class="logo">Sofra</p>
-            </div>
-            <div class="container respon">
-                <!-- Navigation Links -->
-                <ul class="navbar-links">
+                <a href="#" class="logo">Sofra</a>
+                <ul class="nav-links">
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ route('all') }}">Kitchens</a></li>
                     <li><a href="#popular-kitchens">About Us</a></li>
                     <li><a href={{ route('show') }}>Contact Us</a></li>
-                    <li><a href="#contact">Join us as kitchen</a></li>
+                    <li><a href="{{ route('owner.register') }}">Join us as kitchen</a></li>
                 </ul>
-            </div>
-                <div class="dropdown-menu">
-                    <form class="dropdown-form">
-                        <select name="nav-links" id="nav-links">
-                            <option value="" disabled selected class="menu-icon">&#9776; Menu</option>
-                            <option value="home">Home</option>
-                            <option value="about">Kitchens</option>
-                            <option value="services">About Us</option>
-                            <option value="contact">Contact Us</option>
-                            <option value="join">Join us as kitchen</option>
-                        </select>
-                    </form>
-                </div>
-            <div class="container2">
-            <div class="navbar-cart">
-                <a href="" class="cart-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                    @if (session()->has('cart') && count(session('cart')) > 0)
-                        <span class="cart-count">{{ count(session('cart')) }}</span>
-                    @else
+                <div class="nav-icons">
+                    <a href="#" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
-                    @endif
-                </a>
-            </div>
-
-            <!-- User Links -->
-            <div class="navbar-user">
-                @guest
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
-                @else
-                    <a href="{{ route('profile.edit') }}">Profile</a>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                @endguest
-            </div>
+                    <a href="#" class="user-icon"><i class="fas fa-user"></i></a>
+                </div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </nav>
     </header>
@@ -89,10 +56,10 @@
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Kitchens</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="">Home</a></li>
+                    <li><a href="all">Kitchens</a></li>
+                    <li><a href="about">About Us</a></li>
+                    <li><a href="contact">Contact Us</a></li>
                 </ul>
             </div>
 
@@ -122,8 +89,23 @@
 
 
     <!-- Add your JS files -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Select elements
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Toggle the menu visibility on click
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('show');
+            });
+        });
+    </script>
+    
+    </script>
     <script src="{{ asset('js/slider.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+
 </body>
 
 </html>

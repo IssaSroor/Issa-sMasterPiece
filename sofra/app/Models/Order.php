@@ -13,7 +13,7 @@ class Order extends Model
         'customer_id',
         'kitchen_id',
         'order_total_amount',
-        'deliveryAddress',
+        'order_address',
         'order_status',
         'order_payment_status',
         'managed_by',

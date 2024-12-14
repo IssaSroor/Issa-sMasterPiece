@@ -15,12 +15,13 @@ class Kitchen extends Model
         'kitchen_short_desc',
         'kitchen_description',
         'kitchen_phone',
-        'kitchen_rating',
         'kitchen_address',
+        'kitchen_image',
+        'free_delivery',
+        'time_for_delivery',
         'kitchen_status',
         'kitchen_state',
-        'kitchen_working_hours',
-        'kitchen_image',
+        'kitchen_rating',
         'accepted_by',
     ];
     public function getKitchenImageAttribute($value)
@@ -39,9 +40,9 @@ class Kitchen extends Model
     }
 
     public function foodItems()
-    {
-        return $this->hasMany(Food_item::class, 'kitchen_id');
-    }
+{
+    return $this->belongsToMany(Food_item::class, 'kitchen_food_items', 'kitchen_id', 'item_id');
+}
 
     public function orders()
     {

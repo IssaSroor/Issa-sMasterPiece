@@ -21,7 +21,7 @@ return new class extends Migration
             $table->String('kitchen_phone');
             $table->String('kitchen_address');
             $table->String('kitchen_image');
-            $table->boolean('free_delivery');
+            $table->boolean('free_delivery')->default(0);
             $table->integer('time_for_delivery');
             $table->enum('kitchen_status',['opened','closed','busy'])->default('closed');
             $table->enum('kitchen_state',['pending','approved','rejected'])->default('pending');

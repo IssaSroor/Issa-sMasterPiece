@@ -12,7 +12,7 @@ class Kitchen_review extends Model
     protected $fillable = [
         'kitchen_id',
         'customer_id',
-        'rating',
+        'review_rating',
         'review_text',
         'accepted_by',
         'review_status'
@@ -27,9 +27,4 @@ class Kitchen_review extends Model
     {
         return $this->belongsTo(User::class, 'customer_id');
     }
-    public function kitchens()
-    {
-        return $this->belongsTo(Kitchen::class, 'kitchen_id');
-    }
-    
 }

@@ -8,43 +8,67 @@
     <!-- Filters -->
     <div class="filters-container">
         <div class="primary-filters">
-            <button class="btn btn-primary" onclick="filterKitchens('food')">Food</button>
-            <button class="btn btn-primary" onclick="filterKitchens('dessert')">Dessert</button>
+            <a href="{{ route('all') }}" class="btn btn-primary">All Kitchens</a>
+            <a href="{{ route('all', ['category' => 'Food']) }}" class="btn btn-primary">Food</a>
+            <a href="{{ route('all', ['category' => 'sweet']) }}" class="btn btn-primary">Dessert</a>
         </div>
         <div class="secondary-filters">
-            <button class="btn btn-secondary" onclick="filterKitchens('free-delivery')">Free Delivery</button>
-            <button class="btn btn-secondary" onclick="filterKitchens('rating')">High Rating</button>
-            <button class="btn btn-secondary" onclick="filterKitchens('time')">Fast Delivery</button>
+            <a href="{{ route('all', ['filter' => 'free-delivery']) }}" class="btn btn-secondary">Free Delivery</a>
+            <a href="{{ route('all', ['filter' => 'time']) }}" class="btn btn-secondary">Fast Delivery</a>
+            <a href="{{ route('all', ['filter' => 'rating']) }}" class="btn btn-secondary">High Rating</a>
         </div>
     </div>
 
     <!-- Kitchens List -->
-    <div class="kitchen-list">
-        @foreach($kitchens as $kitchen)
-            <div class="kitchen-card">
-                <div class="kitchen-image">
-                    <img src="{{ asset('storage/kitchens/' . $kitchen->kitchen_image) }}" alt="{{ $kitchen->kitchen_name }}">
+    <div class="container my-4">
+        <div class="row g-3">
+            @foreach ($kitchens as $kitchen)
+                <div class="col-md-4 col-sm-6">
+                    <a href="{{ route('kitchen.show', $kitchen->id) }}" class="text-decoration-none text-dark">
+                        <div class="card h-100 shadow-sm">
+                            <!-- Image Section -->
+                            <img 
+                                src="{{ asset($kitchen->kitchen_image) }}" 
+                                class="card-img-top img-fluid" 
+                                alt="{{ $kitchen->kitchen_name }}" 
+                                style="height: 230px; object-fit: cover;">
+                            
+                            <!-- Card Body -->
+                            <div class="card-body d-flex flex-column">
+                                <!-- Title -->
+                                <h5 class="card-title text-truncate">
+                                    {{ $kitchen->kitchen_name }}
+                                </h5>
+    
+                                <!-- Short Description -->
+                                <p class="card-text text-truncate" style="max-width: 100%;">
+                                    {{ $kitchen->kitchen_short_desc }}
+                                </p>
+    
+                                <!-- Delivery Time -->
+                                <p class="text-muted mt-auto text-truncate" style="max-width: 100%;">
+                                    <small>{{ $kitchen->time_for_delivery }} mins</small>
+                                </p>
+    
+                                <!-- Bottom Row -->
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    @if ($kitchen->free_delivery)
+                                        <span class="badge bg-success">Free Delivery</span>
+                                    @endif
+                                    <span class="text-warning">⭐ {{ $kitchen->kitchen_rating }}/5</span>
+                                    @if ($kitchen->discount)
+                                        <span class="badge bg-danger">{{ $kitchen->discount }}% Off</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="kitchen-details">
-                    <div class="top-row">
-                        <h3>{{ $kitchen->kitchen_name }}</h3>
-                        <span>{{ $kitchen->kitchen_address }}</span>
-                        <span>{{ $kitchen->time_for_delivery }} mins</span>
-                    </div>
-                    <p>{{ $kitchen->kitchen_short_desc }}</p>
-                    <div class="bottom-row">
-                        @if($kitchen->free_delivery)
-                            <span class="badge badge-success">Free Delivery</span>
-                        @endif
-                        <span class="rating">⭐ {{ $kitchen->rating }}/5</span>
-                        @if($kitchen->discount)
-                            <span class="discount">Discount: {{ $kitchen->discount }}%</span>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
+    
+    
 
     <!-- Footer -->
 @endsection

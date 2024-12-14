@@ -33,7 +33,7 @@
         <div class="kitchen-grid">
             @foreach($newKitchens as $kitchen)
             <div class="kitchen-card1">
-                <img src="{{ asset('storage/kitchens/' . $kitchen->kitchen_image) }}" alt="{{ $kitchen->kitchen_name }}">
+                <img src="{{ $kitchen->kitchen_image ? asset($kitchen->kitchen_image) : asset('storage/kitchens/kitchen.jpg') }}" alt="{{ $kitchen->kitchen_name }}">
                 <h3>{{ $kitchen->kitchen_name }}</h3>
                 <p>{{ $kitchen->kitchen_short_desc }}</p>
                 <a href="{{ route('kitchen.show', $kitchen->id) }}" class="btn">View Kitchen</a>
@@ -44,16 +44,25 @@
 
     <!-- Popular Kitchens Section -->
     <section id="new-kitchens" class="section">
-        <h2>Popular Kitchens</h2>
+        <h3>Popular Kitchens</h3>
         <div class="kitchen-grid">
             @foreach($popularKitchens as $kitchen)
             <div class="kitchen-card1">
-                <img src="{{ asset('storage/kitchens/' . $kitchen->kitchen_image) }}" alt="{{ $kitchen->kitchen_name }}">
+                <img src="{{ asset($kitchen->kitchen_image) }}" alt="{{ $kitchen->kitchen_name }}">
                 <h3>{{ $kitchen->kitchen_name }}</h3>
-                <p>Rating: {{ $kitchen->kitchen_rating }}/5</p>
+                <p class="rating">
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $kitchen->kitchen_rating)
+                            <i class="fas fa-star filled-star"></i> <!-- Filled star -->
+                        @else
+                            <i class="fas fa-star empty-star"></i> <!-- Empty star -->
+                        @endif
+                    @endfor
+                </p>
                 <a href="{{ route('kitchen.show', $kitchen->id) }}" class="btn">Order Now</a>
             </div>
             @endforeach
         </div>
     </section>
+    
 @endsection

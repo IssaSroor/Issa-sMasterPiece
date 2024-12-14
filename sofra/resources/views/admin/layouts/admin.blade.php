@@ -21,7 +21,7 @@
                 <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ route('admin.kitchens.admin_index') }}">Manage Kitchens</a></li>
                 <li><a href="{{ route('admin.categories.index') }}">Manage Categories</a></li>
-                <li><a href="{{ route('admin.reviews.index') }}">Manage Reviews</a></li>
+                <li><a href="{{ route('admin.reviews.index') }}">Pending Reviews</a></li>
                 <li><a href="{{ route('admin.orders.index') }}">Manage Orders</a></li>
                 <li><a href="{{ route('admin.questions.index') }}">Contact Messages</a></li>
                 @if (auth()->user()->admin_role === 'super_admin')
@@ -36,7 +36,7 @@
         <header class="admin-header">
             <h1>@yield('header-title', 'Admin Dashboard')</h1>
             <div class="admin-actions">
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf
                     <button class="btn btn-logout">Logout</button>
                 </form>

@@ -28,6 +28,7 @@
     </section>
 
     <!-- New Kitchens Section -->
+    <div class="container">
     <section id="new-kitchens" class="section">
         <h2>New Kitchens</h2>
         <div class="kitchen-grid">
@@ -41,8 +42,10 @@
             @endforeach
         </div>
     </section>
+</div>
 
     <!-- Popular Kitchens Section -->
+    <div class="container">
     <section id="new-kitchens" class="section">
         <h3>Popular Kitchens</h3>
         <div class="kitchen-grid">
@@ -64,5 +67,5 @@
             @endforeach
         </div>
     </section>
-    
+</div>
 @endsection

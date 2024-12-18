@@ -16,7 +16,7 @@
         </div>
         <div class="image-section">
             <h3>Kitchen Image:</h3>
-            <img src="{{ asset('storage/' . $kitchen->kitchen_image) }}" alt="{{ $kitchen->kitchen_name }}" style="max-width: 100%; border-radius: 8px;">
+            <img src="{{ asset($kitchen->kitchen_image) }}" alt="{{ $kitchen->kitchen_name }}" style="max-width: 100%; border-radius: 8px;">
         </div>
         <a href="{{ route('admin.kitchens.admin_index') }}" class="btn btn-primary mt-3">Back to Kitchens</a>
     </div>

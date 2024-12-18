@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kitchen_review;
 use App\Models\Kitchen;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +25,7 @@ class ReviewController extends Controller
             $selectedKitchen = Kitchen::find($request->input('kitchen_id'));
             $reviews = Kitchen_review::with('user')
                 ->where('kitchen_id', $selectedKitchen->id)
-                ->where('review_status','pending')
+                ->where('review_status', 'pending')
                 ->get();
         }
 
@@ -58,4 +59,61 @@ class ReviewController extends Controller
 
         return redirect()->route('admin.reviews.index')->with('success', 'Review rejected successfully!');
     }
+
+    public function checkPurchased(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You need to log in before adding a review.',
+            ]);
+        }
+
+        $kitchenId = $request->kitchen_id;
+
+        $hasPurchased = Order::where('customer_id', $user->id)
+            ->whereHas('items', function ($query) use ($kitchenId) {
+                $query->where('kitchen_id', $kitchenId);
+            })
+            ->exists();
+
+        if ($hasPurchased) {
+            return response()->json([
+                'status' => 'success',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You cannot add a review for this kitchen without purchasing first.',
+            ]);
+        }
+    }
+
+
+
+    // Store the review
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'kitchen_id' => 'required|exists:kitchens,id',
+            'review_text' => 'required|string|max:1000',
+            'review_rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        $user = Auth::user();
+
+        // Save the review
+        Kitchen_review::create([
+            'customer_id' => $user->id,
+            'kitchen_id' => $validated['kitchen_id'],
+            'review_text' => $validated['review_text'],
+            'review_rating' => $validated['review_rating'],
+            'accepted_by' => 0,
+        ]);
+
+        return redirect()->back()->with('success', 'Your review has been submitted successfully.');
+    }
+
+
 }

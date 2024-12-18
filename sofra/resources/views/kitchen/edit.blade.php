@@ -62,7 +62,7 @@
                     <label for="kitchen_image">Image</label>
                     @if($kitchen->kitchen_image)
                     <div class="image-preview">
-                        <img src="{{ asset('storage/' . $kitchen->kitchen_image) }}" alt="{{ $kitchen->kitchen_name }}">
+                        <img src="{{ asset($kitchen->kitchen_image) }}" alt="{{ $kitchen->kitchen_name }}">
                     </div>
                     @endif
                     <input type="file" id="kitchen_image" name="kitchen_image" class="input-field">

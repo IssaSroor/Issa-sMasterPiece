@@ -13,7 +13,7 @@
             <label for="category_image">Category Image</label>
             <input type="file" class="form-control" id="category_image" name="category_image">
             @if($category->category_image)
-                <img src="{{ asset('storage/' . $category->category_image) }}" alt="Category Image" width="100">
+                <img src="{{ asset('storage/categories/' . $category->category_image) }}" alt="Category Image" width="100">
             @endif
         </div>
         <button type="submit" class="btn btn-warning" style="width: 97.4%">Update Category</button>

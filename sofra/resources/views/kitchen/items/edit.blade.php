@@ -34,7 +34,7 @@
         <label for="item_image">Item Image</label>
         <input type="file" class="form-control-file" id="item_image" name="item_image">
         @if($item->item_image)
-            <p>Current image: <img src="{{ asset('storage/images/' . $item->item_image) }}" alt="{{ $item->item_name }}" class="img-thumbnail" style="max-width: 150px;"></p>
+            <p>Current image: <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->item_name }}" class="img-thumbnail" style="max-width: 150px;"></p>
         @endif
     </div>
 

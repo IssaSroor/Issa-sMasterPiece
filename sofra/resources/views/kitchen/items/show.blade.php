@@ -15,7 +15,7 @@
         <div>
             <strong>Image:</strong><br>
             @if($item->item_image)
-                <img src="{{ asset('storage/images/' . $item->item_image) }}" alt="{{ $item->item_name }}" class="img-fluid" style="max-width: 200px;">
+                <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->item_name }}" class="img-fluid" style="max-width: 200px;">
             @else
                 <p>No image available</p>
             @endif

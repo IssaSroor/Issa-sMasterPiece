@@ -20,7 +20,7 @@
         <tr>
             <td>{{ $category->category_name }}</td>
             <td>
-                <img src="{{ asset('storage/' . $category->category_image) }}" alt="Category Image" width="50">
+                <img src="{{ asset('storage/categories/' . $category->category_image) }}" alt="Category Image" width="50">
             </td>
             <td>
                 <form action="{{ route('admin.categories.edit', $category->id) }}" style="display: inline-block">

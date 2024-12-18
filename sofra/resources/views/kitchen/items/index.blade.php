@@ -21,7 +21,7 @@
         <tr>
             <td>{{ $item->item_name }}</td>
             <td>{{ $item->item_description }}</td>
-            <td><img src="{{ asset('images/items/'.$item->item_image) }}" alt="{{ $item->item_name }}" style="width: 100px; height: auto;"></td>
+            <td><img src="{{ asset('storage/'.$item->item_image) }}" alt="{{ $item->item_name }}" style="width: 100px; height: auto;"></td>
             <td>{{ $item->item_availability ? 'Available' : 'Out of Stock' }}</td>
             <td>{{ $item->item_discount }}%</td>
             <td>

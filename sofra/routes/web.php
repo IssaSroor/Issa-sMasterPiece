@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KitchenController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
@@ -23,19 +25,45 @@ use App\Http\Controllers\AdminAuthController;
 */
 
 Route::get('/', [KitchenController::class, 'index'])->name('home');
+
 Route::get('kitchen/{id}', [KitchenController::class, 'show'])->name('kitchen.show');
-// Route::get('/kitchen/{id}/menu', [Controller::class, 'index'])->name('kitchen.menu');
+
+Route::post('/send-message', [KitchenController::class, 'storeMessage'])->name('send.message');
+
+Route::post('/reviews/check-purchased', [ReviewController::class, 'checkPurchased']);
+
+Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+
 Route::get('allKitchens', [KitchenController::class, 'allKitchens'])->name('all');
+
+Route::get('/kitchen/{kitchenId}/menu', [KitchenController::class, 'showMenu'])->name('menu');
+
 Route::get('/kitchen.register', [KitchenController::class, 'showRegistrationForm'])->name('kitchen.register.page');
+
 Route::post('/kitchen/register', [KitchenController::class, 'registerKitchen'])->name('kitchen.register.submit');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.view');
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
+Route::post('/checkout/place-order', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+
+Route::get('/thank-you', function () {
+    return view('thankyou');
+})->name('thankyou.page');
+
+Route::get('/about',function(){
+    return view('about-us');
+})->name('about');
+
 
 Route::middleware(['auth:owner'])->group(function () {
     Route::get('/kitchen/{id}/profile', [KitchenController::class, 'profile'])->name('kitchen.profile');
     Route::get('/kitchen/{id}/orders', [KitchenController::class, 'orders'])->name('kitchen.orders');
     Route::get('/kitchen/{id}/messages', [KitchenController::class, 'messages'])->name('kitchen.messages');
     Route::get('/kitchen/{id}/items', [KitchenController::class, 'items'])->name('kitchen.items');
-    Route::get('/kitchen/{id}/edit', [KitchenController::class, 'edit'])->name('kitchen.edit'); // Edit form
-    Route::put('/kitchen/{id}/update', [KitchenController::class, 'update'])->name('kitchen.update'); // Update logic
+    Route::get('/kitchen/{id}/edit', [KitchenController::class, 'edit'])->name('kitchen.edit'); 
+    Route::put('/kitchen/{id}/update', [KitchenController::class, 'update'])->name('kitchen.update'); 
     Route::get('/kitchen/{id}/items/add', [KitchenController::class, 'addItem'])->name('kitchen.items.add');
     Route::post('/kitchen/{id}/items/add', [KitchenController::class, 'storeItem'])->name('kitchen.items.store');
 
@@ -122,6 +150,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('questions', [QuestionController::class, 'index_admin'])->name('questions.index');
         Route::post('questions/{id}/resolve', [QuestionController::class, 'resolve'])->name('questions.resolve');
     });
+
     Route::middleware(['auth:admin', 'super_admin'])->group(function () {
         Route::get('/admins', [AdminAuthController::class, 'index'])->name('admins.index');
         Route::post('/admins', [AdminAuthController::class, 'register'])->name('admins.store');

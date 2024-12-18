@@ -38,7 +38,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($orderId);
         $orderItems = Order_item::findOrFail($orderId);
 
-        return view('kitchen.orders.view', compact('kitchen', 'order' , 'orderItems'));
+        return view('kitchen.orders.view', compact('kitchen', 'order', 'orderItems'));
     }
     public function update(Request $request, $id, $order_id)
     {
@@ -57,12 +57,20 @@ class OrderController extends Controller
 
         // Update the order status
         $order->order_status = $request->input('order_status');
+
+        // If the status is 'on delivery', update the order_payment_status to 'paid'
+        if ($request->input('order_status') === 'on delivery') {
+            $order->order_payment_status = 'paid';
+        }
+
+        // Save the order
         $order->save();
 
         // Redirect with success message
         return redirect()->route('kitchen.orders', ['id' => $id])
             ->with('success', 'Order status updated successfully.');
     }
+
 
 
 }

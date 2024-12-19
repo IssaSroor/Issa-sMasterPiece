@@ -306,6 +306,7 @@ input:focus {
     gap: 2px;
     align-items: center;
     justify-content: center;
+    margin-right: 18px;
 }
 
 .filled-star {
@@ -448,14 +449,19 @@ body {
 .send-message{
     display: flex;
     background-color: #666;
-    width: 120px;
+    width: 130px;
     height: 50px;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     color: #fff;
     border-radius: 30px;
-    
+    transition: background-color 0.3s;
+
+}
+
+.send-message:hover{
+    background-color: #333;
 }
 
 /* Kitchen Description */
@@ -1588,7 +1594,7 @@ button.btn:hover {
 }
 
 /* General Section Styling */
-.bg0 {
+.bg1{
     background-color: #f9f9f9;
     padding: 75px 0 120px;
 }
@@ -1613,12 +1619,6 @@ button.btn:hover {
     color: #555;
 }
 
-/* Highlighted Text */
-.stext-111 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #444;
-}
 
 .cl6 {
     color: #757575;
@@ -1679,7 +1679,7 @@ button.btn:hover {
 }
 
 /* Button Hover Effects */
-button:hover, .mtext-111:hover, .stext-111:hover {
+button:hover, .mtext-111:hover{
     color: #222;
     text-decoration: underline;
     cursor: pointer;

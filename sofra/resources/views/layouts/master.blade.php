@@ -35,7 +35,8 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
                     </a>
-                    <a href="#" class="user-icon"><i class="fas fa-user"></i></a>
+                    <a href="#" class="user-icon" onclick="redirectToUserPage(event)"><i
+                            class="fas fa-user"></i></a>
                 </div>
                 <div class="menu-toggle">
                     <i class="fas fa-bars"></i>
@@ -118,6 +119,22 @@
         @endif
     </script>
 
+    <script>
+        function redirectToUserPage(event) {
+            event.preventDefault();
+
+            // Replace with your logic to check if the user is logged in
+            const isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
+
+            if (isLoggedIn) {
+                // Redirect to user profile
+                window.location.href = '/dashboard'; // Replace with the actual user profile URL
+            } else {
+                // Redirect to login page
+                window.location.href = '/login'; // Replace with the actual login URL
+            }
+        }
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Select elements

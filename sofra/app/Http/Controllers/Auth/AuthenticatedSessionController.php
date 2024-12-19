@@ -45,4 +45,9 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    protected function redirectTo()
+    {
+        return route('user.account-info'); // Redirect to the desired page
+    }
 }

@@ -12,26 +12,41 @@
         <div class="container">
             <!-- Kitchen Header -->
             <div class="kitchen-header">
-                <div class="rating">
-                    <p class="rating">
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= floor($averageRating))
-                                <i class="fas fa-star filled-star"></i> <!-- Filled star -->
-                            @elseif ($i - $averageRating < 1)
-                                <i class="fas fa-star-half-alt filled-star"></i> <!-- Half star -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Rating Section -->
+                    <div class="rating">
+                        <p class="rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= floor($averageRating))
+                                    <i class="fas fa-star filled-star"></i> <!-- Filled star -->
+                                @elseif ($i - $averageRating < 1)
+                                    <i class="fas fa-star-half-alt filled-star"></i> <!-- Half star -->
+                                @else
+                                    <i class="fas fa-star empty-star"></i> <!-- Empty star -->
+                                @endif
+                            @endfor
+                        </p>
+                        <span>{{ number_format($averageRating, 1) }} / 5</span> <!-- Display the numeric average -->
+                    </div>
+
+                    <!-- Kitchen Status -->
+                    <div class="kitchen-status">
+                        <span class="status-label">
+                            @if ($kitchen->kitchen_status == 'opened')
+                                <span class="badge bg-success">Open</span>
+                            @elseif ($kitchen->kitchen_status == 'closed')
+                                <span class="badge bg-danger">Closed</span>
+                            @elseif ($kitchen->kitchen_status == 'busy')
+                                <span class="badge bg-warning text-dark">Busy</span>
                             @else
-                                <i class="fas fa-star empty-star"></i> <!-- Empty star -->
+                                <span class="badge bg-secondary">Unknown</span>
                             @endif
-                        @endfor
-                    </p>
-                    <span>{{ number_format($averageRating, 1) }} / 5</span> <!-- Display the numeric average -->
+                        </span>
+                    </div>
                 </div>
 
-
-                <div>
-                    <a href="{{ route('menu', $kitchen->id) }}" class="view-menu">View Menu</a>
-                </div>
-                <div>
+                <!-- Send Message Section -->
+                <div class="d-flex mt-3">
                     <div>
                         @if (auth()->check())
                             <a href="#" class="send-message" data-bs-toggle="modal"
@@ -40,6 +55,11 @@
                             <a href="#" class="send-message" onclick="showLoginAlert()">Send Message</a>
                         @endif
                     </div>
+                </div>
+
+                <!-- View Menu Section -->
+                <div class="mt-3">
+                    <a href="{{ route('menu', $kitchen->id) }}" class="view-menu">View Menu</a>
                 </div>
 
                 <!-- Message Modal -->
@@ -76,8 +96,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
 
             <!-- Full Description -->
             <div class="kitchen-description">
@@ -190,18 +211,20 @@
 
 
     <!-- Review Form Modal -->
-    <div id="reviewForm" class="review-form-container mt-4 p-4 border rounded shadow-lg container" style="display: none;">
+    <div id="reviewForm" class="review-form-container mt-4 p-4 border rounded shadow-lg container"
+        style="display: none;">
         <h5 class="mb-3">Write a Review</h5>
         <form action="{{ route('reviews.store') }}" method="POST">
             @csrf
             <input type="hidden" name="kitchen_id" value="{{ $kitchen->id }}">
-    
+
             <!-- Review Text -->
             <div class="mb-3">
                 <label for="review_text" class="form-label">Your Review</label>
-                <textarea name="review_text" id="review_text" class="form-control" rows="4" placeholder="Share your experience..." required></textarea>
+                <textarea name="review_text" id="review_text" class="form-control" rows="4"
+                    placeholder="Share your experience..." required></textarea>
             </div>
-    
+
             <!-- Rating -->
             <div class="mb-3">
                 <label for="review_rating" class="form-label">Your Rating</label>
@@ -214,13 +237,13 @@
                 </div>
                 <input type="hidden" name="review_rating" id="review_rating" required>
             </div>
-            
-    
+
+
             <!-- Submit Button -->
             <button type="submit" class="btn btn-success w-100">Submit Review</button>
         </form>
     </div>
-    
+
 
     </section>
 

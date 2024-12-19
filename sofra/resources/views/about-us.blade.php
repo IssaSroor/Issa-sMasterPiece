@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<section class="bg0 p-t-75 p-b-120">
+<section class="bg1 p-t-75 p-b-120">
     <div class="container">
         <div class="row p-b-148">
             <div class="col-md-7 col-lg-8">

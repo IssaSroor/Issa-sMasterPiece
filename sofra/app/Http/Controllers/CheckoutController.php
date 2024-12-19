@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kitchen;
 use App\Models\Order;
 use App\Models\Order_item;
 use Illuminate\Http\Request;
@@ -48,6 +49,19 @@ public function placeOrder(Request $request)
         return back()->with('error', 'Cart is empty.');
     }
 
+    // Get the kitchen ID (assuming all items belong to the same kitchen)
+    $kitchenId = $cart[0]['kitchenId'];
+
+    // Check the kitchen's status
+    $kitchen = Kitchen::find($kitchenId);
+    if (!$kitchen) {
+        return back()->with('error', 'Kitchen not found.');
+    }
+
+    if ($kitchen->kitchen_status !== 'opened') {
+        return back()->with('error', "The kitchen is currently {$kitchen->kitchen_status}. We apologize for the inconvenience.");
+    }
+
     // Calculate the total amount
     $subtotal = array_reduce($cart, function ($carry, $item) {
         return $carry + ($item['productPrice'] * $item['quantity']);
@@ -61,7 +75,7 @@ public function placeOrder(Request $request)
     // Create the order
     $order = Order::create([
         'customer_id' => $user->id,
-        'kitchen_id' => $cart[0]['kitchenId'], // Assuming all items belong to the same kitchen
+        'kitchen_id' => $kitchenId,
         'order_total_amount' => $totalAmount,
         'order_address' => $user->customer_address ?? 'Default Address', // Adjust based on your setup
         'order_status' => 'Confirmed', // Default order status
@@ -85,5 +99,6 @@ public function placeOrder(Request $request)
     // Redirect with SweetAlert and success message
     return redirect()->route('thankyou.page')->with('success', 'Order placed successfully!');
 }
+
 
 }

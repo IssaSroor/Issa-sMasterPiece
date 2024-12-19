@@ -9,6 +9,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 
@@ -102,15 +103,13 @@ Route::post('questions', [QuestionController::class, 'store'])->name('questions.
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+    Route::get('/dashboard/account-info', [UserController::class, 'accountInfo'])->name('user.account-info');
+    Route::put('/dashboard/account-info', [UserController::class, 'updateAccount'])->name('user.update-account');
+    Route::get('/dashboard/orders', [UserController::class, 'orders'])->name('user.orders');
 });
+
 
 Route::prefix('owner')->group(function () {
     Route::get('register', [OwnerController::class, 'showRegisterForm'])->name('owner.register');

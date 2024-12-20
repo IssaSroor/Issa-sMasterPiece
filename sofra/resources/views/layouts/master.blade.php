@@ -45,6 +45,39 @@
         </nav>
 
     </header>
+    @php
+        use Diglactic\Breadcrumbs\Breadcrumbs;
+    @endphp
+
+    @if (
+        !Route::is('home') &&
+            !Route::is('owner.register') &&
+            !Route::is('owner.login') &&
+            !Route::is('cart.view') &&
+            !Route::is('checkout.index') &&
+            !Route::is('kitchen.show') &&
+            !Route::is('menu') &&
+            !Route::is('thankyou.page'))
+        <!-- Check if the current route is not the home page -->
+        <div class="breadcrumb-container">
+            <h1 class="breadcrumb-title">
+                {{ Breadcrumbs::current() ? Breadcrumbs::current()->title : '' }}
+            </h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    @foreach (Breadcrumbs::generate() as $breadcrumb)
+                        @if ($breadcrumb->url && !$loop->last)
+                            <li class="breadcrumb-item">
+                                <a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a>
+                            </li>
+                        @else
+                            <li class="breadcrumb-item active" aria-current="page">{{ $breadcrumb->title }}</li>
+                        @endif
+                    @endforeach
+                </ol>
+            </nav>
+        </div>
+    @endif
 
     <!-- Main Content -->
     <main>
@@ -117,6 +150,55 @@
                 timer: 3000
             });
         @endif
+
+        @if ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                html: `
+                <ul style="text-align: left; margin: 0; padding: 0; list-style: none;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            `,
+                showConfirmButton: false,
+                timer: 5000
+            });
+        @endif
+    </script>
+
+    <script>
+        function viewOrderDetails(button) {
+            const orderId = button.getAttribute('data-order-id');
+
+            // Fetch order details using an AJAX call
+            fetch(`/orders/${orderId}`)
+                .then(response => response.json())
+                .then(order => {
+                    // Populate modal fields
+                    document.getElementById('modalOrderId').textContent = order.id;
+                    document.getElementById('modalOrderDate').textContent = new Date(order.created_at)
+                        .toLocaleDateString();
+                    document.getElementById('modalOrderTotal').textContent = order.order_total_amount;
+                    document.getElementById('modalOrderStatus').textContent = order.order_status;
+
+                    // Populate food items
+                    const foodItemsList = document.getElementById('modalFoodItems');
+                    foodItemsList.innerHTML = ''; // Clear existing items
+                    order.food_items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'list-group-item';
+                        li.textContent = `${item.name} - ${item.quantity} x ${item.price} JD`;
+                        foodItemsList.appendChild(li);
+                    });
+
+                    // Show the modal
+                    const orderDetailsModal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+                    orderDetailsModal.show();
+                })
+                .catch(error => console.error('Error fetching order details:', error));
+        }
     </script>
 
     <script>

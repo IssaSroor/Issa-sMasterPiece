@@ -151,9 +151,9 @@ class KitchenController extends Controller
             'kitchen_name' => 'required|string|max:255',
             'kitchen_short_desc' => 'required|string|max:255',
             'kitchen_description' => 'required|string',
-            'kitchen_phone' => 'required|string|max:15',
+            'kitchen_phone' => 'required|numeric|digits:10',
             'kitchen_address' => 'required|string|max:255',
-            'kitchen_image' => 'required|image|mimes:jpg,png,jpeg|min:1900',
+            'kitchen_image' => 'required|image|mimes:jpg,png,jpeg|dimensions:min_width=1750,min_height=1200',
             'time_for_delivery' => 'required|integer|min:1',
         ]);
 
@@ -410,6 +410,18 @@ class KitchenController extends Controller
 
         // Redirect back with success message
         return redirect()->back()->with('success', 'Message sent successfully!');
+    }
+
+    public function logout()
+    {
+
+        Auth::guard('owner')->logout();
+        session()->invalidate();
+
+        session()->regenerateToken();
+
+        return view('owner.login');
+
     }
 
 }

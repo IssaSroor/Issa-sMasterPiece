@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KitchenController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
@@ -39,10 +39,6 @@ Route::get('allKitchens', [KitchenController::class, 'allKitchens'])->name('all'
 
 Route::get('/kitchen/{kitchenId}/menu', [KitchenController::class, 'showMenu'])->name('menu');
 
-Route::get('/kitchen.register', [KitchenController::class, 'showRegistrationForm'])->name('kitchen.register.page');
-
-Route::post('/kitchen/register', [KitchenController::class, 'registerKitchen'])->name('kitchen.register.submit');
-
 Route::get('/cart', [CartController::class, 'index'])->name('cart.view');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
@@ -53,18 +49,20 @@ Route::get('/thank-you', function () {
     return view('thankyou');
 })->name('thankyou.page');
 
-Route::get('/about',function(){
+Route::get('/about', function () {
     return view('about-us');
 })->name('about');
 
 
 Route::middleware(['auth:owner'])->group(function () {
+    Route::get('/kitchen.register', [KitchenController::class, 'showRegistrationForm'])->name('kitchen.register.page');
+    Route::post('/kitchen/register', [KitchenController::class, 'registerKitchen'])->name('kitchen.register.submit');
     Route::get('/kitchen/{id}/profile', [KitchenController::class, 'profile'])->name('kitchen.profile');
     Route::get('/kitchen/{id}/orders', [KitchenController::class, 'orders'])->name('kitchen.orders');
     Route::get('/kitchen/{id}/messages', [KitchenController::class, 'messages'])->name('kitchen.messages');
     Route::get('/kitchen/{id}/items', [KitchenController::class, 'items'])->name('kitchen.items');
-    Route::get('/kitchen/{id}/edit', [KitchenController::class, 'edit'])->name('kitchen.edit'); 
-    Route::put('/kitchen/{id}/update', [KitchenController::class, 'update'])->name('kitchen.update'); 
+    Route::get('/kitchen/{id}/edit', [KitchenController::class, 'edit'])->name('kitchen.edit');
+    Route::put('/kitchen/{id}/update', [KitchenController::class, 'update'])->name('kitchen.update');
     Route::get('/kitchen/{id}/items/add', [KitchenController::class, 'addItem'])->name('kitchen.items.add');
     Route::post('/kitchen/{id}/items/add', [KitchenController::class, 'storeItem'])->name('kitchen.items.store');
 
@@ -79,10 +77,15 @@ Route::middleware(['auth:owner'])->group(function () {
     // Route to delete an item
     Route::delete('/kitchen/{kitchen_id}/items/{item_id}', [KitchenController::class, 'destroy'])->name('kitchen.items.delete');
 
+    Route::put('/owner/profile/{id}', [OwnerController::class, 'updateProfile'])->name('owner.profile.update');
+    Route::get('/owner/profile/{id}', [OwnerController::class, 'profile'])->name('owner.profile');
+
+    Route::post('/logout', [KitchenController::class, 'logout'])->name('owner.logout');
+
+
 });
 
-Route::put('/owner/profile/{id}', [OwnerController::class, 'updateProfile'])->name('owner.profile.update');
-Route::get('/owner/profile/{id}', [OwnerController::class, 'profile'])->name('owner.profile');
+
 
 
 // Route to edit the order
@@ -108,6 +111,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/account-info', [UserController::class, 'accountInfo'])->name('user.account-info');
     Route::put('/dashboard/account-info', [UserController::class, 'updateAccount'])->name('user.update-account');
     Route::get('/dashboard/orders', [UserController::class, 'orders'])->name('user.orders');
+    Route::get('/orders/{id}', [UserController::class, 'showOrder'])->name('orders.show');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
 
@@ -115,7 +120,7 @@ Route::prefix('owner')->group(function () {
     Route::get('register', [OwnerController::class, 'showRegisterForm'])->name('owner.register');
     Route::post('register', [OwnerController::class, 'register']);
     Route::get('login', [OwnerController::class, 'showLoginForm'])->name('owner.login');
-    Route::post('login', [OwnerController::class, 'login']);
+    Route::post('login', [OwnerController::class, 'login'])->name('owner.login');
     Route::post('logout', [OwnerController::class, 'logout'])->name('owner.logout');
 
     Route::get('dashboard', [OwnerController::class, 'dashboard'])->name('owner.dashboard');

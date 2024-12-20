@@ -13,10 +13,18 @@
                     <i class="fas fa-user me-2"></i> Account Info
                 </a>
             </li>
-            <li>
+            <li class="mb-2">
                 <a href="{{ route('user.orders') }}" class="text-white text-decoration-none">
                     <i class="fas fa-shopping-bag me-2"></i> Orders
                 </a>
+            </li>
+            <li class="mt-4">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger w-100">
+                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </button>
+                </form>
             </li>
         </ul>
     </aside>

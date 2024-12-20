@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('time_for_delivery');
             $table->enum('kitchen_status',['opened','closed','busy'])->default('closed');
             $table->enum('kitchen_state',['pending','approved','rejected'])->default('pending');
-            $table->integer('kitchen_rating')->default(0);
+            $table->float('kitchen_rating')->default(0);
             $table->bigInteger('accepted_by')->unsigned()->nullable();
             $table->foreign('accepted_by')->references('id')->on('admins')->onDelete('cascade');
             $table->timestamps();

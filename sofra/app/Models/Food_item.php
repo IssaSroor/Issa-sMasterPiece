@@ -35,4 +35,24 @@ class Food_item extends Model
         return $this->belongsToMany(Order::class, 'orderItems', 'item_id', 'order_id')
             ->withPivot('quantity', 'price');
     }
+
+    public function showOrder($id)
+{
+    $order = auth()->user()->orders()->with('items')->findOrFail($id);
+
+    return response()->json([
+        'id' => $order->id,
+        'created_at' => $order->created_at->format('d-m-Y'),
+        'total' => $order->order_total_amount,
+        'order_status' => $order->order_status,
+        'food_items' => $order->items->map(function ($item) {
+            return [
+                'name' => $item->item_name,
+                'quantity' => $item->pivot->quantity, // Quantity from pivot table
+                'price' => $item->pivot->item_price, // Price from pivot table
+            ];
+        }),
+    ]);
+}
+
 }

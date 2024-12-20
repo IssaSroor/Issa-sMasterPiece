@@ -1685,4 +1685,52 @@ button:hover, .mtext-111:hover{
     cursor: pointer;
 }
 
+.breadcrumb-container {
+    background-image: url('/images/breadcrumb1.jpg'); /* Replace with correct image path */
+    background-size: cover;        /* Make sure the image covers the entire area */
+    background-position: center;  /* Center the image */
+    color: #fff;                   /* White text for contrast */
+    border-radius: 0.5rem;         /* Optional: Rounded corners */
+    padding: 0;                    /* Remove padding for precise alignment */
+    margin-bottom: 1rem;
+    position: relative;            /* Enable positioning of child elements */
+    height: 340px;                 /* Set height for the breadcrumb container */
+    display: flex;                 /* Use flex for alignment */
+    flex-direction: column;        /* Stack items vertically */
+    justify-content: space-between; /* Separate title and breadcrumb links */
+    align-items: center;           /* Center title horizontally */
+    text-align: center;            /* Center-align text */
+}
+
+.breadcrumb-title {
+    font-size: 2rem;               /* Make the title larger */
+    font-weight: bold;             /* Bold text for emphasis */
+    margin: 0;                     /* Remove default margins */
+    padding-top: 5em;             /* Add space at the top */
+    z-index: 1;                    /* Ensure the title is above the background */
+}
+
+.breadcrumb {
+    width: 100%;                   /* Ensure breadcrumb spans the container */
+    padding: 0.5rem 1rem;          /* Add some padding */
+    margin: 0;                     /* Remove default margins */
+    display: flex;                 /* Use flex for alignment */
+    justify-content: flex-start;   /* Align breadcrumb links to the left */
+    align-items: flex-end;         /* Align breadcrumb links at the bottom */
+    background: transparent;       /* No background for breadcrumb links */
+    position: relative;
+}
+
+.breadcrumb .breadcrumb-item,
+.breadcrumb .breadcrumb-item a {
+    color: #666;                   /* Ensure text and links are white */
+    text-decoration: none;         /* Remove underline from links */
+}
+
+.breadcrumb-item a:hover{
+    color: #333;
+}
+
+
+
 

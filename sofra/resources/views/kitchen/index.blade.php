@@ -56,9 +56,6 @@
                                         <span class="badge bg-success">Free Delivery</span>
                                     @endif
                                     <span class="text-warning">⭐ {{ $kitchen->kitchen_rating }}/5</span>
-                                    @if ($kitchen->discount)
-                                        <span class="badge bg-danger">{{ $kitchen->discount }}% Off</span>
-                                    @endif
                                 </div>
                             </div>
                         </div>

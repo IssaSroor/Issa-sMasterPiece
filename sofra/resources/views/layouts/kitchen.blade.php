@@ -56,7 +56,14 @@
                         <i class="fas fa-user-cog"></i> Owner Profile
                     </a>
                 </li>
-
+                <li>
+                    <form action="{{ route('owner.logout') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-link text-danger" style="padding: 0; text-decoration: none;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </form>
+                </li>
             </ul>
         </aside>
 

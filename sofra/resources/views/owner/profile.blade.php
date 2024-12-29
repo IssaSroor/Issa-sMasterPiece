@@ -5,7 +5,6 @@
 @section('content')
 <div class="owner-profile">
     <h1>Owner Profile</h1>
-    <h3>Kitchen: {{ $kitchen->name }}</h3> <!-- Display kitchen details -->
 
     <form action="{{ route('owner.profile.update', ['id' => $kitchen->id]) }}" method="POST">
         @csrf

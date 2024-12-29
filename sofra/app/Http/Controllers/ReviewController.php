@@ -95,15 +95,17 @@ class ReviewController extends Controller
     // Store the review
     public function store(Request $request)
     {
+        // dd($request);
         // Validate the input data
         $validated = $request->validate([
             'kitchen_id' => 'required|exists:kitchens,id',
             'review_text' => 'required|string|max:1000',
             'review_rating' => 'required|integer|min:1|max:5',
+            'order_id' => 'required|exists:orders,id', // Ensure order_id is present and valid
         ]);
-    
+
         $user = Auth::user();
-    
+
         // Save the review
         Kitchen_review::create([
             'customer_id' => $user->id,
@@ -112,18 +114,24 @@ class ReviewController extends Controller
             'review_rating' => $validated['review_rating'],
             'accepted_by' => 0,
         ]);
-    
+
         // Calculate the new average review rating for the kitchen
         $averageRating = Kitchen_review::where('kitchen_id', $validated['kitchen_id'])
             ->avg('review_rating');
-    
+
         // Update the kitchens table with the new average rating
         Kitchen::where('id', $validated['kitchen_id'])->update([
             'kitchen_rating' => $averageRating,
         ]);
-    
+
+        // Update the is_reviewed attribute in the orders table
+        Order::where('id', $validated['order_id'])->update([
+            'is_reviewed' => true,
+        ]);
+
         return redirect()->back()->with('success', 'Your review has been submitted successfully.');
     }
-    
+
+
 
 }

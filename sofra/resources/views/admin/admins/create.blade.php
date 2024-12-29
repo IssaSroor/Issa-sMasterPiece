@@ -31,7 +31,7 @@
                 <option value="super_admin">Super Admin</option>
             </select>
         </div>
-        <button type="submit" class="btn-success" style="width: 97.4%">Add Admin</button>
+        <button type="submit" class="btn-primary" style="width: 97.4%">Add Admin</button>
     </form>
 </div>
 @endsection

@@ -14,25 +14,25 @@
                             {{-- Name --}}
                             <div class="bor8 bg0 m-b-20">
                                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name"
-                                    value="{{ $userData['name'] ?? '' }}" disabled placeholder="Name" />
+                                    value="{{"Name: ". $userData['name'] ?? '' }}" disabled placeholder="Name" />
                             </div>
 
                             {{-- Email --}}
                             <div class="bor8 bg0 m-b-20">
                                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="email" name="email"
-                                    value="{{ $userData['email'] ?? '' }}" disabled placeholder="Email Address" />
+                                    value="{{"Email: ". $userData['email'] ?? '' }}" disabled placeholder="Email Address" />
                             </div>
 
                             {{-- Phone Number --}}
                             <div class="bor8 bg0 m-b-20">
                                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone"
-                                    value="{{ $userData['phone'] ?? '' }}" disabled placeholder="Phone Number" />
+                                    value="{{"Phone Number: ". $userData['phone'] ?? '' }}" disabled placeholder="Phone Number" />
                             </div>
 
                             {{-- Address --}}
                             <div class="bor8 bg0 m-b-12">
                                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address"
-                                    value="{{ $userData['address'] ?? '' }}" disabled placeholder="Address" />
+                                    value="{{"Address: ". $userData['address'] ?? '' }}" disabled placeholder="Address" />
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                             </span>
                                         </div>
                                         <div class="size-209">
-                                            <span class="mtext-110 cl2" style="margin-left: 90px;">
+                                            <span class="mtext-110 cl2" style="margin-left: 70px;">
                                                 {{ number_format($item['productPrice'], 2) }}JD X {{ $item['quantity'] }}
                                             </span>
                                         </div>
@@ -96,9 +96,17 @@
                                     </span>
                                 </div>
                             </div>
-
+                            <div>
+                            <br>
+                            <br>
+                                <h4 class="mtext-109 cl2">Payment Method</h4>
+                                <form>
+                                    <input type="radio" name="payment_method" value="cash_on_delivery" checked>
+                                    <label for="cash_on_delivery">Cash on Delivery</label>
+                                </form>
+                            </div>
                             <button type="submit"
-                                class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                                class="checkout-btn">
                                 Place Order
                             </button>
                         </div>

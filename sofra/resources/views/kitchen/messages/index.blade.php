@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>Customer Name</th>
+            <th>Phone Number</th>
             <th>Subject</th>
             <th>Message</th>
         </tr>
@@ -16,6 +17,7 @@
         @foreach($messages as $message)
         <tr>
             <td>{{ $message->customer->name }}</td>
+            <td>{{ $message->customer->customer_phone }}</td>
             <td>{{ $message->message_subject }}</td>
             <td>{{ $message->message_text }}</td>
         </tr>

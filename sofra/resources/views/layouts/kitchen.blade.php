@@ -13,8 +13,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/new1.css') }}">
 </head>
 
 <body>
@@ -59,7 +58,7 @@
                 <li>
                     <form action="{{ route('owner.logout') }}" method="POST" style="display: inline;">
                         @csrf
-                        <button type="submit" class="btn btn-link text-danger" style="padding: 0; text-decoration: none;">
+                        <button type="submit" class="btn btn-link text-danger" style="text-decoration: none;">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </form>

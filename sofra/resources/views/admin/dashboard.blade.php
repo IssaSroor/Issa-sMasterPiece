@@ -28,10 +28,6 @@
                 <p>{{ $activeKitchens }}</p>
             </div>
             <div class="stat-card">
-                <h3>Pending Orders</h3>
-                <p>{{ $pendingOrders }}</p>
-            </div>
-            <div class="stat-card">
                 <h3>New Signups (Last Month)</h3>
                 <p>{{ $newCustomers }}</p>
             </div>
@@ -45,4 +41,5 @@
             </div>
         </div>
     </div>
+    
 @endsection

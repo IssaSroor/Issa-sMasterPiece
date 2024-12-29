@@ -10,7 +10,7 @@
     <a href="{{ route('kitchen.orders', ['id' => $kitchen->id, 'filter' => 'prepared']) }}" 
        class="btn btn-warning {{ $filter == 'prepared' ? 'active' : '' }}">Prepared</a>
     <a href="{{ route('kitchen.orders', ['id' => $kitchen->id, 'filter' => 'on delivery']) }}" 
-       class="btn btn-success {{ $filter == 'on delivery' ? 'active' : '' }}">On Delivery</a>
+       class="btn btn-success {{ $filter == 'on delivery' ? 'active' : '' }}">Delivered</a>
 </div>
 
 <!-- Orders Table -->

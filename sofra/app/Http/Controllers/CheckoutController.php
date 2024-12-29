@@ -87,7 +87,7 @@ public function placeOrder(Request $request)
     foreach ($cart as $item) {
         Order_item::create([
             'order_id' => $order->id,
-            'item_id' => $item['productId'], // Assuming 'productId' refers to the item's ID
+            'item_id' => $item['productId'],
             'quantity' => $item['quantity'],
             'price' => $item['productPrice'],
         ]);

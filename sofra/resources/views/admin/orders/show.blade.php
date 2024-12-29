@@ -6,8 +6,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Orders for {{ $kitchen->kitchen_name }}</h2>
-        <table>
+        <table class="common-table">
             <thead>
                 <tr>
                     <th>Order ID</th>

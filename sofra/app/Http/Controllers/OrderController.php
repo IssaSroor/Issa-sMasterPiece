@@ -44,7 +44,7 @@ class OrderController extends Controller
     {
         // Validate incoming data
         $request->validate([
-            'order_status' => 'required|in:confirmed,prepared,on delivery',
+            'order_status' => 'required|in:confirmed,prepared,delivered',
         ]);
 
         // Find the order by its ID and ensure it's in the correct kitchen
@@ -59,7 +59,7 @@ class OrderController extends Controller
         $order->order_status = $request->input('order_status');
 
         // If the status is 'on delivery', update the order_payment_status to 'paid'
-        if ($request->input('order_status') === 'on delivery') {
+        if ($request->input('order_status') === 'delivered') {
             $order->order_payment_status = 'paid';
         }
 

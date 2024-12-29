@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <p><strong>Short Description:</strong> {{ $kitchen->kitchen_short_desc }}</p>
-                    <p><strong>Description:</strong> {{ $kitchen->kitchen_description }}</p>
+                    <p><strong>Description:</strong> {{ Str::limit($kitchen->kitchen_description, 100, '...') }}</p>
                     <p><strong>Phone:</strong> {{ $kitchen->kitchen_phone }}</p>
                 </div>
                 <div class="col-md-6">

@@ -16,7 +16,7 @@
         @endif
 
         <!-- Form to update the order status -->
-        <form method="POST" action="{{ route('kitchen.orders.update', ['id' => $kitchen->id, 'order_id' => $order->id]) }}">
+        <form class="edit-form" method="POST" action="{{ route('kitchen.orders.update', ['id' => $kitchen->id, 'order_id' => $order->id]) }}">
             @csrf
             @method('PUT')
             

@@ -17,6 +17,7 @@
                 </thead>
                 <tbody>
                     @foreach ($orders as $order)
+                        {{-- @dd($orders); --}}
                         <tr>
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->created_at->format('d-m-Y') }}</td>
@@ -27,12 +28,18 @@
                                     onclick="viewOrderDetails(this)">
                                     View
                                 </button>
+                                @if (!$order->has_review)
+                                    <button onclick="showReviewForm({{ $order->id }}, {{ $order->kitchen_id }})"
+                                        class="btn btn-primary">
+                                        Add Review
+                                    </button>
+                                @endif
                             </td>
+
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        @endif
     </div>
 
     <!-- Modal for Order Details -->
@@ -55,5 +62,44 @@
             </div>
         </div>
     </div>
+
+    <div id="reviewForm" class="review-form-container mt-4 p-4 border rounded shadow-lg container" style="display: none;">
+        <h5 class="mb-3">Write a Review</h5>
+        <form action="{{ route('reviews.store') }}" method="POST">
+            @csrf
+
+            <input type="hidden" name="order_id" id="order_id">
+            <input type="hidden" name="kitchen_id" id="kitchen_id">
+
+
+            <!-- Review Text -->
+            <div class="mb-3">
+                <label for="review_text" class="form-label">Your Review</label>
+                <textarea name="review_text" id="review_text" class="form-control" rows="4" placeholder="Share your experience..."
+                    required></textarea>
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-3">
+                <label for="review_rating" class="form-label">Your Rating</label>
+                <div class="star-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <input type="hidden" name="review_rating" id="review_rating" required>
+            </div>
+
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn bg3 w-100">Submit Review</button>
+            <button type="button" class="btn-close" onclick="hideReviewForm()" aria-label="Close"></button>
+
+        </form>
+    </div>
+    @endif
+
 
 @endsection

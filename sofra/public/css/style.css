@@ -48,7 +48,7 @@
 }
 
 .custom-navbar .nav-links li a:hover {
-    background-color: var(--secondary-color); 
+    background-color: var(--secondary-color);
     color: #000;
 }
 
@@ -130,8 +130,8 @@ h2 {
 }
 
 button {
-    background-color: var(--primary-color); 
-    color: var(--secondary-color); 
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -140,7 +140,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--hover-color); 
+    background-color: var(--hover-color);
 }
 
 .error {
@@ -213,7 +213,7 @@ input:focus {
 .cta-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: var(--primary-color); 
+    background-color: var(--primary-color);
     color: var(--secondary-color);
     text-decoration: none;
     font-size: 1.2em;
@@ -221,7 +221,7 @@ input:focus {
 }
 
 .cta-button:hover {
-    background-color: var(--hover-color); 
+    background-color: var(--hover-color);
     color: var(--secondary-color);
 }
 
@@ -229,7 +229,7 @@ input:focus {
 /* Section Styling */
 #new-kitchens {
     padding: 50px 0;
-    background-color: #f9f9f9; 
+    background-color: #f9f9f9;
     text-align: center;
 }
 
@@ -242,10 +242,7 @@ input:focus {
 /* Kitchen Grid Styling */
 .kitchen-grid {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(280px, 1fr)
-    ); 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     justify-items: center;
 }
@@ -269,7 +266,7 @@ input:focus {
 .kitchen-card1 img {
     width: 100%;
     height: 200px;
-    object-fit: cover; 
+    object-fit: cover;
     border-bottom: 1px solid #ddd;
 }
 
@@ -288,7 +285,7 @@ input:focus {
 .kitchen-card1 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: var(--primary-color); 
+    background-color: var(--primary-color);
     color: #fff;
     text-decoration: none;
     font-size: 1rem;
@@ -301,7 +298,7 @@ input:focus {
 }
 
 .rating {
-    color: #ffc107; 
+    color: #ffc107;
     display: flex;
     gap: 2px;
     align-items: center;
@@ -310,18 +307,17 @@ input:focus {
 }
 
 .filled-star {
-    color: #FFD700; /* Gold color */
+    color: #ffd700; /* Gold color */
 }
 
 .empty-star {
-    color: #D3D3D3; /* Light gray color */
+    color: #d3d3d3; /* Light gray color */
 }
 
 .rating i {
     margin-right: 5px; /* Add spacing between stars */
-    font-size: 20px;   /* Adjust size */
+    font-size: 20px; /* Adjust size */
 }
-
 
 /* contact us */
 .contact-form {
@@ -399,10 +395,10 @@ input:focus {
 
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif; 
-    line-height: 1.6; 
-    background-color: #f9f9f9; 
-    color: #333; 
+    font-family: "Arial", sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
     margin: 0;
     padding: 0;
 }
@@ -410,9 +406,9 @@ body {
 /* Kitchen Banner */
 .kitchen-banner {
     position: relative;
-    height: 400px; 
-    background-size: cover; 
-    background-position: center; 
+    height: 400px;
+    background-size: cover;
+    background-position: center;
 }
 
 .kitchen-banner .overlay {
@@ -421,32 +417,32 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    color: #fff; 
+    justify-content: center;
+    align-items: center;
+    color: #fff;
     text-align: center;
 }
 
 .kitchen-banner h1 {
     font-size: 2.5rem;
-    margin: 0; 
+    margin: 0;
 }
 
 /* Kitchen Details */
 .kitchen-details {
-    padding: 20px; 
+    padding: 20px;
 }
 
 .kitchen-header {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
-.send-message{
+.send-message {
     display: flex;
     background-color: #666;
     width: 130px;
@@ -457,63 +453,62 @@ body {
     color: #fff;
     border-radius: 30px;
     transition: background-color 0.3s;
-
 }
 
-.send-message:hover{
+.send-message:hover {
     background-color: #333;
 }
 
 /* Kitchen Description */
 .kitchen-description {
-    margin-bottom: 30px; 
+    margin-bottom: 30px;
 }
 
 .kitchen-description h3 {
-    font-size: 1.5rem; 
-    margin-bottom: 10px; 
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
 /* Best Sellers Section */
 .best-sellers {
     background-color: #fff;
-    padding: 20px; 
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .best-sellers h2 {
     font-size: 2rem;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .card {
     border: none;
-    border-radius: 10px; 
+    border-radius: 10px;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Reviews Section */
 .reviews {
-    background-color: #fff; 
-    padding: 20px; 
-    border-radius: 10px; 
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
 
 .reviews h2 {
-    font-size: 2rem; 
-    margin-bottom: 20px; 
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
 .card-title {
-    font-weight: bold; 
+    font-weight: bold;
 }
 
 .card-text {
@@ -523,16 +518,16 @@ body {
 /* Responsive Styles */
 @media (max-width: 768px) {
     .kitchen-banner h1 {
-        font-size: 2rem; 
+        font-size: 2rem;
     }
 
     .kitchen-details {
-        padding: 10px; 
+        padding: 10px;
     }
 
     .best-sellers h2,
     .reviews h2 {
-        font-size: 1.5rem; 
+        font-size: 1.5rem;
     }
 }
 /* all kitchens page */
@@ -552,10 +547,7 @@ body {
 
 .kitchen-list {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(280px, 1fr)
-    ); 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     justify-items: center;
 }
 .kitchen-link {
@@ -609,7 +601,6 @@ body {
     border-radius: 5px;
 }
 
-
 .discount {
     color: #d40000;
 }
@@ -629,7 +620,7 @@ body {
 /* Footer Styles */
 footer {
     background-color: var(--primary-color);
-    color: var(--secondary-color); 
+    color: var(--secondary-color);
     padding: 40px 20px;
     font-size: 14px;
 }
@@ -645,13 +636,13 @@ footer {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: var(--secondary-color); 
+    color: var(--secondary-color);
 }
 
 .footer-logo p {
     font-size: 16px;
     line-height: 1.5;
-    color: var(--secondary-color); 
+    color: var(--secondary-color);
 }
 
 .footer-links h4,
@@ -660,7 +651,7 @@ footer {
     font-size: 18px;
     margin-bottom: 15px;
     font-weight: bold;
-    color: var(--secondary-color); 
+    color: var(--secondary-color);
 }
 
 ul {
@@ -675,12 +666,12 @@ ul li {
 
 ul li a {
     text-decoration: none;
-    color: var(--secondary-color); 
+    color: var(--secondary-color);
     transition: color 0.3s;
 }
 
 ul li a:hover {
-    color: var(--hover-color); 
+    color: var(--hover-color);
 }
 
 .footer-social ul {
@@ -691,7 +682,7 @@ ul li a:hover {
 .footer-social ul li a {
     display: inline-block;
     padding: 10px;
-    background-color: var(--primary-color); 
+    background-color: var(--primary-color);
     color: var(--secondary-color);
     border-radius: 50%;
     width: 60px;
@@ -705,8 +696,8 @@ ul li a:hover {
 }
 
 .footer-social ul li a:hover {
-    background-color: var(--hover-color); 
-    color: var(--primary-color); 
+    background-color: var(--hover-color);
+    color: var(--primary-color);
 }
 
 .copyright {
@@ -782,7 +773,7 @@ select:focus {
 
 /* Textarea Styling */
 textarea {
-    resize: none; 
+    resize: none;
     height: 100px;
 }
 
@@ -799,7 +790,7 @@ label {
 button.btn {
     width: 100%;
     padding: 12px 20px;
-    background-color: #ff4500; 
+    background-color: #ff4500;
     color: #ffffff;
     font-size: 1.1rem;
     font-weight: bold;
@@ -811,7 +802,7 @@ button.btn {
 
 button.btn:hover {
     background-color: #ff4500;
-    transform: scale(1.03); 
+    transform: scale(1.03);
 }
 
 /* Success Message Styling */
@@ -981,21 +972,19 @@ button.btn:hover {
 }
 
 .add-to-cart-btn {
-    background-color: var(--primary-color); 
-    color: white; 
-    font-weight: bold; 
-    border: none; 
-    border-radius: 5px; 
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
     padding: 10px 20px;
-    cursor: pointer; 
-    transition: background-color 0.3s ease, transform 0.2s ease; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .add-to-cart-btn:hover {
-    background-color: var(
-        --hover-color
-    ); 
-    transform: scale(1); 
+    background-color: var(--hover-color);
+    transform: scale(1);
 }
 
 /* General Styling for the Card */
@@ -1163,16 +1152,16 @@ button.btn:hover {
 }
 
 .btn-remove {
-    background-color: transparent; 
-    border: none; 
-    color: #dc3545; 
+    background-color: transparent;
+    border: none;
+    color: #dc3545;
     cursor: pointer;
-    font-size: 20px; 
-    transition: color 0.3s; 
+    font-size: 20px;
+    transition: color 0.3s;
 }
 
 .btn-remove:hover {
-    color: #c82333; 
+    color: #c82333;
 }
 
 /* Responsive Design */
@@ -1273,23 +1262,23 @@ button.btn:hover {
     margin: 30px 0 30px 0;
     padding: 30px;
     background-color: #ffffff;
-    border-radius: 10px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Summary Section Styling */
 .summary {
-    padding: 30px; 
-    background-color: #ffffff; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
-    margin: 30px 0 30px 40px; 
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 30px 0 30px 40px;
 }
 
 /* Form Header */
 .mtext-109 {
-    font-size: 1.75rem; 
-    font-weight: 600; 
+    font-size: 1.75rem;
+    font-weight: 600;
     color: #333;
     text-align: center;
     margin-bottom: 25px;
@@ -1297,8 +1286,8 @@ button.btn:hover {
 
 /* Input Fields */
 .bor8 {
-    border: 1px solid #ccc; 
-    border-radius: 8px; 
+    border: 1px solid #ccc;
+    border-radius: 8px;
     overflow: hidden;
     margin-bottom: 15px;
 }
@@ -1306,50 +1295,50 @@ button.btn:hover {
 .stext-111 {
     font-size: 1rem;
     color: #333;
-    padding: 12px 15px; 
-    width: 100%; 
-    border: none; 
-    outline: none; 
+    padding: 12px 15px;
+    width: 100%;
+    border: none;
+    outline: none;
     background-color: #fff;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); 
-    transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out; 
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
 .stext-111:focus {
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); 
-    border: 1px solid #007bff; 
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    border: 1px solid #007bff;
 }
 
 /* Placeholder Text */
 .stext-111::placeholder {
-    color: #aaa; 
-    font-size: 0.9rem; 
+    color: #aaa;
+    font-size: 0.9rem;
 }
 
 /* Disabled Input Styling */
 .stext-111[disabled] {
-    background-color: #f5f5f5; 
-    color: #888; 
-    cursor: not-allowed; 
+    background-color: #f5f5f5;
+    color: #888;
+    cursor: not-allowed;
 }
 
 /* Inner Container */
 .bor10 {
-    border: 1px solid #ddd; 
-    border-radius: 10px; 
-    background-color: #ffffff; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #ffffff;
     padding: 20px;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 /* Cart Items */
 .flex-w.flex-t {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 15px 0; 
-    border-bottom: 1px solid #eee; 
-    margin-bottom: 10px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
 }
 
 .flex-w.flex-t:last-child {
@@ -1358,25 +1347,25 @@ button.btn:hover {
 
 /* Product Name */
 .stext-110 {
-    font-size: 1rem; 
+    font-size: 1rem;
     color: #555;
 }
 
 /* Product Price */
 .mtext-110 {
-    font-size: 0.9rem; 
-    color: #333; 
-    font-weight: bold; 
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: bold;
 }
 
 /* Total Section */
 .flex-w.p-t-27.p-b-33 {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    margin-top: 20px; 
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
     border-top: 1px solid #ddd;
-    padding-top: 20px; 
+    padding-top: 20px;
 }
 
 .mtext-101 {
@@ -1395,14 +1384,14 @@ button.btn:hover {
 .flex-c-m {
     display: inline-flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     width: 100%;
     margin-top: 20px;
     font-size: 1rem;
-    font-weight: bold; 
-    color: #fff; 
+    font-weight: bold;
+    color: #fff;
     background-color: var(--primary-color);
-    border: none; 
+    border: none;
     border-radius: 10px;
     padding: 15px;
     cursor: pointer;
@@ -1410,28 +1399,28 @@ button.btn:hover {
 }
 
 .flex-c-m:hover {
-    background-color: var(--hover-color); 
-    transform: translateY(-2px); 
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .checkout {
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
     }
 
     .summary {
-        padding: 20px; 
+        padding: 20px;
     }
 
     .mtext-109 {
         font-size: 1.5rem;
-        text-align: left; 
+        text-align: left;
     }
 
     .mtext-101,
     .mtext-110 {
-        font-size: 1rem; 
+        font-size: 1rem;
     }
 }
 
@@ -1525,7 +1514,7 @@ button.btn:hover {
     gap: 10px; /* Add spacing between links */
 }
 
-.view-menu{
+.view-menu {
     display: flex;
     width: 130px;
     height: 50px;
@@ -1537,10 +1526,9 @@ button.btn:hover {
     margin-right: 40px;
     border-radius: 30px;
     transition: background-color 0.3s;
-
 }
 
-.view-menu:hover{
+.view-menu:hover {
     background-color: var(--hover-color);
 }
 
@@ -1578,23 +1566,22 @@ button.btn:hover {
     color: #d3d3d3; /* Default star color */
 }
 
-
 .star-rating .star.selected {
     color: #f5c518; /* Selected star color */
 }
 
-.close-button{
+.close-button {
     width: 100%;
     background-color: #555;
     color: #fff;
 }
 
-.close-button:hover{
+.close-button:hover {
     background-color: #333;
 }
 
 /* General Section Styling */
-.bg1{
+.bg1 {
     background-color: #f9f9f9;
     padding: 75px 0 120px;
 }
@@ -1618,7 +1605,6 @@ button.btn:hover {
     line-height: 1.7;
     color: #555;
 }
-
 
 .cl6 {
     color: #757575;
@@ -1673,64 +1659,64 @@ button.btn:hover {
         flex-direction: column;
     }
 
-    .p-r-85, .p-l-85 {
+    .p-r-85,
+    .p-l-85 {
         padding: 15px;
     }
 }
 
 /* Button Hover Effects */
-button:hover, .mtext-111:hover{
+button:hover,
+.mtext-111:hover {
     color: #222;
     text-decoration: underline;
     cursor: pointer;
 }
 
 .breadcrumb-container {
-    background-image: url('/images/breadcrumb1.jpg'); /* Replace with correct image path */
-    background-size: cover;        /* Make sure the image covers the entire area */
-    background-position: center;  /* Center the image */
-    color: #fff;                   /* White text for contrast */
-    border-radius: 0.5rem;         /* Optional: Rounded corners */
-    padding: 0;                    /* Remove padding for precise alignment */
+    background-image: url("/images/breadcrumb1.jpg"); /* Replace with correct image path */
+    background-size: cover; /* Make sure the image covers the entire area */
+    background-position: center; /* Center the image */
+    color: #fff; /* White text for contrast */
+    border-radius: 0.5rem; /* Optional: Rounded corners */
+    padding: 0; /* Remove padding for precise alignment */
     margin-bottom: 1rem;
-    position: relative;            /* Enable positioning of child elements */
-    height: 340px;                 /* Set height for the breadcrumb container */
-    display: flex;                 /* Use flex for alignment */
-    flex-direction: column;        /* Stack items vertically */
+    position: relative; /* Enable positioning of child elements */
+    height: 300px; /* Set height for the breadcrumb container */
+    display: flex; /* Use flex for alignment */
+    flex-direction: column; /* Stack items vertically */
     justify-content: space-between; /* Separate title and breadcrumb links */
-    align-items: center;           /* Center title horizontally */
-    text-align: center;            /* Center-align text */
+    align-items: center; /* Center title horizontally */
+    text-align: center; /* Center-align text */
 }
 
 .breadcrumb-title {
-    font-size: 2rem;               /* Make the title larger */
-    font-weight: bold;             /* Bold text for emphasis */
-    margin: 0;                     /* Remove default margins */
-    padding-top: 5em;             /* Add space at the top */
-    z-index: 1;                    /* Ensure the title is above the background */
+    font-size: 2rem; /* Make the title larger */
+    font-weight: bold; /* Bold text for emphasis */
+    margin: 0; /* Remove default margins */
+    margin-top: 50px;
+    padding-top: 5em; /* Add space at the top */
+    z-index: 1; /* Ensure the title is above the background */
 }
 
 .breadcrumb {
-    width: 100%;                   /* Ensure breadcrumb spans the container */
-    padding: 0.5rem 1rem;          /* Add some padding */
-    margin: 0;                     /* Remove default margins */
-    display: flex;                 /* Use flex for alignment */
-    justify-content: flex-start;   /* Align breadcrumb links to the left */
-    align-items: flex-end;         /* Align breadcrumb links at the bottom */
-    background: transparent;       /* No background for breadcrumb links */
+    width: 100%; /* Ensure breadcrumb spans the container */
+    padding: 0.5rem 1rem; /* Add some padding */
+    margin: 0; /* Remove default margins */
+    display: flex; /* Use flex for alignment */
+    justify-content: flex-start; /* Align breadcrumb links to the left */
+    align-items: flex-end; /* Align breadcrumb links at the bottom */
+    background: transparent; /* No background for breadcrumb links */
     position: relative;
 }
 
 .breadcrumb .breadcrumb-item,
 .breadcrumb .breadcrumb-item a {
-    color: #666;                   /* Ensure text and links are white */
-    text-decoration: none;         /* Remove underline from links */
+    color: #666; 
+    text-decoration: none; /* Remove underline from links */
 }
 
-.breadcrumb-item a:hover{
+.breadcrumb-item a:hover {
     color: #333;
 }
-
-
-
 

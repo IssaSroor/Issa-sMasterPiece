@@ -12,8 +12,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/new.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.875em;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,7 +34,7 @@
                     <li><a href="{{ route('all') }}">Kitchens</a></li>
                     <li><a href="{{ route('about') }}">About Us</a></li>
                     <li><a href="{{ route('show') }}">Contact Us</a></li>
-                    <li><a href="{{ route('owner.register') }}">Join us as kitchen</a></li>
+                    <li><a href="{{ route('owner.login') }}">Join us as kitchen</a></li>
                 </ul>
                 <div class="nav-icons">
                     <!-- Updated cart icon -->
@@ -35,8 +42,32 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
                     </a>
-                    <a href="#" class="user-icon" onclick="redirectToUserPage(event)"><i
-                            class="fas fa-user"></i></a>
+                    <!-- User Icon -->
+                    @if (auth()->check())
+                        <!-- If User is Logged In -->
+                        <div class="dropdown user-dropdown">
+                            <a href="#" class="user-icon dropdown-toggle" id="userDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item profile-link"
+                                        onclick="redirectToUserPage(event)">Profile</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item logout-button">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <!-- If User is Not Logged In -->
+                        <a href="{{ route('login') }}" class="user-icon">
+                            <i class="fas fa-sign-in-alt"></i> <!-- Login Icon -->
+                        </a>
+                    @endif
+
                 </div>
                 <div class="menu-toggle">
                     <i class="fas fa-bars"></i>
@@ -130,6 +161,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Add your JS files -->
+
+
     <script>
         @if (session('success'))
             Swal.fire({
@@ -166,6 +199,183 @@
                 timer: 5000
             });
         @endif
+    </script>
+
+    <script>
+        document.getElementById('questionForm').addEventListener('submit', function(e) {
+            let isValid = true;
+
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.textContent = '';
+                error.classList.remove('show');
+            });
+            document.querySelectorAll('input, textarea').forEach(input => {
+                input.classList.remove('error');
+            });
+
+            // Validate Name
+            const name = document.getElementById('client_name');
+            if (!name.value.trim()) {
+                document.getElementById('nameError').textContent = 'Name is required';
+                document.getElementById('nameError').classList.add('show');
+                name.classList.add('error');
+                isValid = false;
+            } else if (!isNaN(name.value)) {
+                document.getElementById('nameError').textContent = "Name must contain only letters and spaces.";
+                document.getElementById('nameError').classList.add('show');
+                name.classList.add('error');
+                isValid = false;
+            }
+
+            // Validate Email
+            const email = document.getElementById('client_email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim() || !emailRegex.test(email.value)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                document.getElementById('emailError').classList.add('show');
+                email.classList.add('error');
+                isValid = false;
+            }
+
+            // Validate Subject
+            const subject = document.getElementById('subject');
+            if (!subject.value.trim()) {
+                document.getElementById('subjectError').textContent = 'Subject is required';
+                document.getElementById('subjectError').classList.add('show');
+                subject.classList.add('error');
+                isValid = false;
+            }
+
+            // Validate Message
+            const message = document.getElementById('question');
+            if (!message.value.trim()) {
+                document.getElementById('messageError').textContent = 'Message is required';
+                document.getElementById('messageError').classList.add('show');
+                message.classList.add('error');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            let isValid = true;
+
+            // Validate Name
+            const name = document.getElementById("name");
+            const nameError = document.getElementById("nameError");
+            if (!name.value.trim()) {
+                nameError.textContent = "Name is required.";
+                isValid = false;
+            } else if (!isNaN(name.value)) {
+                nameError.textContent = "Name must contain only letters and spaces.";
+                isValid = false;
+            } else {
+                nameError.textContent = "";
+            }
+
+            // Validate Email
+            const email = document.getElementById("email");
+            const emailError = document.getElementById("emailError");
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim()) {
+                emailError.textContent = "Email is required.";
+                isValid = false;
+            } else if (!emailPattern.test(email.value)) {
+                emailError.textContent = "A valid email address is required.";
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            // Validate Password
+            const password = document.getElementById("password");
+            const passwordError = document.getElementById("passwordError");
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+
+            if (!password.value.trim()) {
+                passwordError.textContent = "Password is required.";
+                isValid = false;
+            } else if (!passwordPattern.test(password.value)) {
+                passwordError.textContent =
+                    "Password must be at least 8 characters, include one uppercase letter, one lowercase letter, and one special character.";
+                isValid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+
+            // Validate Password Confirmation
+            const passwordConfirmation = document.getElementById("password_confirmation");
+            const passwordConfirmationError = document.getElementById("passwordConfirmationError");
+            if (!passwordConfirmation.value.trim()) {
+                passwordConfirmationError.textContent = "Password confirmation is required.";
+                isValid = false;
+            } else if (password.value !== passwordConfirmation.value) {
+                passwordConfirmationError.textContent = "Passwords do not match.";
+                isValid = false;
+            } else {
+                passwordConfirmationError.textContent = "";
+            }
+
+            // Validate Address
+            const address = document.getElementById("address");
+            const addressError = document.getElementById("addressError");
+            if (!address.value.trim()) {
+                addressError.textContent = "Address is required.";
+                isValid = false;
+            } else if (!isNaN(address.value)) {
+                addressError.textContent = "Address must contain only letters and spaces.";
+                isValid = false;
+            } else {
+                addressError.textContent = "";
+            }
+
+            // Prevent form submission if validation fails
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            let isValid = true;
+
+            // Validate Email
+            const emailField = document.getElementById("email");
+            const emailError = document.getElementById("emailError");
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailField.value.trim()) {
+                emailError.textContent = "Email is required.";
+                isValid = false;
+            } else if (!emailPattern.test(emailField.value)) {
+                emailError.textContent = "Please enter a valid email.";
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            // Validate Password
+            const passwordField = document.getElementById("password");
+            const passwordError = document.getElementById("passwordError");
+            if (!passwordField.value.trim()) {
+                passwordError.textContent = "Password is required.";
+                isValid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+            // Prevent form submission if validation fails
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
     </script>
 
     <script>
@@ -217,22 +427,10 @@
             }
         }
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Select elements
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-
-            // Toggle the menu visibility on click
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('show');
-            });
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function updateNavCartCount() {
-            const cart = getCookie('cart');
+            let cart = getCookie('cart');
             let itemCount = 0;
 
             if (cart.length > 0) {
@@ -332,43 +530,33 @@
             updateCartUI(); // Update the UI without reloading the page
         }
 
-        function updateCartQuantity(productId, newQuantity) {
-            let cart = getCookie('cart');
-
-            // Update quantity for the specific product
-            cart = cart.map(item => {
-                if (item.productId === productId) {
-                    item.productQuantity = newQuantity;
-                }
-                return item;
-            });
-
-            setCookie('cart', cart, 7); // Update cart in cookies
-            updateCartUI(); // Refresh the UI
-        }
-
         // Update the cart UI dynamically
         function updateCartUI() {
             const cartTable = document.querySelector('.cart-table tbody');
-            const cart = getCookie('cart');
+            let cart = getCookie('cart');
 
             if (cartTable) {
-                // Clear the current table content
                 cartTable.innerHTML = '';
 
                 if (cart.length > 0) {
                     cart.forEach(item => {
                         const row = `
-                    <tr>
-                        <td><img src="${item.productImage}" alt="${item.productName}" width="50"></td>
-                        <td>${item.productName}</td>
-                        <td>${item.productPrice} JD</td>
-                        <td>${item.quantity}</td>
-                        <td>
-                            <button onclick="removeFromCart(${item.productId})" class="btn-remove"><i class="fa fa-multiply"></i></button>
-                        </td>
-                    </tr>
-                `;
+                <tr>
+                    <td><img src="${item.productImage}" alt="${item.productName}" width="50"></td>
+                    <td>${item.productName}</td>
+                    <td>${item.productPrice} JD</td>
+                    <td>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn minus-btn" data-id="${item.productId}">-</button>
+                            <span id="quantity-${item.productId}">${item.quantity}</span>
+                            <button type="button" class="quantity-btn plus-btn" data-id="${item.productId}">+</button>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" onclick="removeFromCart(${item.productId})" class="btn-remove"><i class="fa fa-multiply"></i></button>
+                    </td>
+                </tr>
+            `;
                         cartTable.innerHTML += row;
                     });
                 } else {
@@ -376,52 +564,58 @@
                 }
             }
 
-            updateCartSummary(cart); // Update cart totals
-            updateNavCartCount(); // Update cart count in the navigation bar
+            calculateCartTotals();
+            updateNavCartCount();
         }
 
-        // Update the cart summary dynamically
-        function updateCartSummary(cart) {
-            const subtotalElement = document.querySelector('.cart-summary .subtotal');
-            const totalElement = document.querySelector('.cart-summary .total');
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('quantity-btn')) {
+                event.preventDefault();
 
-            const subtotal = cart.reduce(
-                (sum, item) => sum + item.productPrice * item.productQuantity,
-                0
-            );
-            const shipping = 2; // Fixed shipping rate
-            const total = subtotal + shipping;
+                const isPlus = event.target.classList.contains('plus-btn');
+                const productId = event.target.dataset.id;
+                const quantitySpan = document.getElementById(`quantity-${productId}`);
+                let currentQuantity = parseInt(quantitySpan.textContent);
 
-            if (subtotalElement) subtotalElement.textContent = `${subtotal.toFixed(2)} JD`;
-            if (totalElement) totalElement.textContent = `${total.toFixed(2)} JD`;
-        }
-
-        // Ensure cart is updated on page load and back navigation
-        document.addEventListener('DOMContentLoaded', () => {
-            updateCartUI();
-
-            // Prevent stale state when navigating back
-            window.addEventListener('popstate', () => {
-                updateCartUI();
-            });
-        });
-    </script>
-
-    <script>
-        // Utility to get cookie data
-        function getCookie(name) {
-            const cookies = document.cookie.split('; ');
-            for (let cookie of cookies) {
-                const [key, value] = cookie.split('=');
-                if (key === name) {
-                    return JSON.parse(value || '[]');
+                if (isPlus) {
+                    currentQuantity++;
+                } else if (currentQuantity > 1) {
+                    currentQuantity--;
                 }
+
+                quantitySpan.textContent = currentQuantity;
+                updateCartQuantity(productId, currentQuantity);
             }
-            return [];
+        });
+
+        function updateCartQuantity(productId, quantity) {
+            console.log('Updating cart for productId:', productId, 'quantity:', quantity);
+
+            // Get the cart from the cookie
+            let cart = getCookie('cart');
+
+            // Find the product in the cart and update its quantity
+            const updatedCart = cart.map(item => {
+                if (item.productId == productId) {
+                    item.quantity = quantity;
+                }
+                return item;
+            });
+
+            // Save the updated cart back to the cookie
+            setCookie('cart', cart, 7);
+
+            console.log('Cart updated:', updatedCart);
+            updateCartUI(); // Refresh the cart UI after updating
         }
 
+
+
+        document.addEventListener('DOMContentLoaded', updateCartUI);
+    </script>
+    <script>
         function calculateCartTotals() {
-            const cart = getCookie('cart');
+            let cart = getCookie('cart');
             let subtotal = 0;
 
             // Calculate subtotal
@@ -458,42 +652,108 @@
     </script>
 
     <script>
+        function hideReviewForm() {
+            document.getElementById('reviewForm').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+
+    <script>
         function showReviewForm(kitchenId) {
-            console.log('Checking if user has purchased from kitchen ID:', kitchenId); // Debug log
+            // Show backdrop
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            document.body.appendChild(backdrop);
+            backdrop.style.display = 'block';
 
-            fetch('/reviews/check-purchased', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    },
-                    body: JSON.stringify({
-                        kitchen_id: kitchenId
-                    }),
-                })
-                .then(response => {
-                    console.log('Response status:', response.status); // Debug log
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Response data:', data); // Debug log
+            // Show review form
+            const reviewForm = document.getElementById('reviewForm');
+            reviewForm.style.display = 'block';
 
-                    if (data.status === 'success') {
-                        // Show the review form
-                        console.log('Review form will be displayed');
-                        document.getElementById('reviewForm').style.display = 'block';
-                    } else {
-                        // Show SweetAlert for error messages
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: data.message,
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error); // Debug log for fetch errors
+            // Update kitchen_id
+            document.querySelector('input[name="kitchen_id"]').value = kitchenId;
+
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideReviewForm() {
+            // Hide review form
+            document.getElementById('reviewForm').style.display = 'none';
+
+            // Remove backdrop
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        // Star rating functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('review_rating');
+
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const value = this.dataset.value;
+                    highlightStars(value);
                 });
+
+                star.addEventListener('click', function() {
+                    const value = this.dataset.value;
+                    ratingInput.value = value;
+                    highlightStars(value);
+                });
+            });
+
+            document.querySelector('.star-rating').addEventListener('mouseout', function() {
+                const rating = ratingInput.value;
+                highlightStars(rating);
+            });
+
+            function highlightStars(value) {
+                stars.forEach(star => {
+                    star.classList.toggle('active', star.dataset.value <= value);
+                });
+            }
+        });
+    </script>
+
+    <script>
+        function showReviewForm(orderId, kitchenId) {
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            document.body.appendChild(backdrop);
+            backdrop.style.display = 'block';
+
+            const reviewForm = document.getElementById('reviewForm');
+            reviewForm.style.display = 'block';
+
+            // Assign dynamic values to hidden inputs
+            document.getElementById('order_id').value = orderId;
+            document.getElementById('kitchen_id').value = kitchenId;
+
+            document.body.style.overflow = 'hidden';
+        }
+
+
+        function hideReviewForm() {
+            // Hide review form
+            const reviewForm = document.getElementById('reviewForm');
+            reviewForm.style.display = 'none';
+            reviewForm.setAttribute('aria-hidden', 'true');
+
+            // Remove backdrop
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
         }
     </script>
 
@@ -518,6 +778,37 @@
                     });
                 });
             });
+        });
+    </script>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            // Initialize the first slide
+            slides[currentSlide].classList.add('active');
+
+            // Auto-advance slides
+            setInterval(() => {
+                const outgoingSlide = slides[currentSlide];
+                currentSlide = (currentSlide + 1) % slides.length;
+                const incomingSlide = slides[currentSlide];
+
+                // Add "active" to the next slide
+                incomingSlide.classList.add('active');
+
+                // Remove "active" from the current slide after fade-out
+                setTimeout(() => {
+                    outgoingSlide.classList.remove('active');
+                }, 1000); // Match this with the CSS transition duration (1s)
+            }, 5000); // Change slide every 5 seconds
         });
     </script>
 

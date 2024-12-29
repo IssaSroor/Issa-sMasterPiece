@@ -6,15 +6,14 @@
 
 @section('content')
     <div class="container">
-        <h2>Kitchens and Orders</h2>
-        <table id="kitchensTable" class="display">
+        <table id="kitchensTable" class="common-table">
             <thead>
                 <tr>
                     <th>Kitchen Name</th>
                     <th>Total Orders</th>
                     <th>Actions</th>
                 </tr>
-            </thead> 
+            </thead>
             <tbody>
                 @foreach ($kitchens as $kitchen)
                     <tr>

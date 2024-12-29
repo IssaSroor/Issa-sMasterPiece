@@ -20,8 +20,9 @@ return new class extends Migration
             $table->bigInteger('managed_by')->unsigned();
             $table->foreign('managed_by')->references('id')->on('admins')->onDelete('cascade');
             $table->String('order_address');
+            $table->boolean('is_reviewed')->default(0);
             $table->float('order_total_amount');
-            $table->enum('order_status',['confirmed','prepared','on delivery'])->default('confirmed');
+            $table->enum('order_status',['confirmed','prepared','delivered'])->default('confirmed');
             $table->enum('order_payment_status',['paid','unpaid'])->default('unpaid');
             $table->timestamps();
         });

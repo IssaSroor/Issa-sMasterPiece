@@ -55,14 +55,18 @@ class KitchenController extends Controller
     public function index()
     {
         $newKitchens = Kitchen::orderBy('id', 'desc')->where('kitchen_state', '=', 'approved')
-            ->limit(4)
+            ->limit(3)
             ->get();
 
-        $popularKitchens = Kitchen::withCount('orders')
+            $popularKitchens = Kitchen::withCount(['orders as total_orders' => function ($query) {
+                $query->select(DB::raw('COUNT(*)'));
+            }])
             ->where('kitchen_state', '=', 'approved')
-            ->orderBy('orders_count', 'desc')
-            ->limit(4)
+            ->orderByDesc('kitchen_rating') // First sort by kitchen_rating in descending order
+            ->orderByDesc('total_orders') // Then sort by the total number of orders in descending order
+            ->limit(3) // Limit the result to 4 kitchens
             ->get();
+        
 
         return view('home', compact('newKitchens', 'popularKitchens'));
     }
@@ -113,7 +117,7 @@ class KitchenController extends Controller
             ->where('review_status', '=', 'approved')
             ->avg('review_rating');
 
-        $bestSellers = DB::table('order_items')
+            $bestSellers = DB::table('order_items')
             ->join('food_items', 'order_items.item_id', '=', 'food_items.id')
             ->join('kitchen_food_items', 'kitchen_food_items.item_id', '=', 'food_items.id')
             ->select(
@@ -127,12 +131,21 @@ class KitchenController extends Controller
                 DB::raw('SUM(order_items.quantity) as total_sales')
             )
             ->where('kitchen_food_items.kitchen_id', $id)
-            ->groupBy('food_items.id', 'food_items.item_name', 'food_items.item_image', 'food_items.item_price')
+            ->groupBy(
+                'food_items.id',
+                'food_items.item_name',
+                'food_items.item_description',
+                'food_items.kitchen_id',
+                'food_items.item_image',
+                'food_items.item_price',
+                'food_items.item_discount'
+            )
             ->orderByDesc('total_sales')
-            ->take(4)
+            ->limit(4)
             ->get();
+        
 
-        $reviews = $kitchen->reviews->where('review_status', '=', 'approved'); // Get the first 3 reviews
+        $reviews = $kitchen->reviews->where('review_status', '=', 'approved');
 
         return view('kitchen.show', compact('kitchen', 'bestSellers', 'reviews', 'averageRating'));
     }
@@ -153,7 +166,7 @@ class KitchenController extends Controller
             'kitchen_description' => 'required|string',
             'kitchen_phone' => 'required|numeric|digits:10',
             'kitchen_address' => 'required|string|max:255',
-            'kitchen_image' => 'required|image|mimes:jpg,png,jpeg|dimensions:min_width=1750,min_height=1200',
+            'kitchen_image' => 'required|image|mimes:jpg,png,jpeg',
             'time_for_delivery' => 'required|integer|min:1',
         ]);
 

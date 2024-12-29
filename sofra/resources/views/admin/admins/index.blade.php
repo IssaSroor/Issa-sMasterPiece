@@ -4,13 +4,12 @@
 
 @section('content')
 <div class="container">
-    <h1>Manage Admins</h1>
 
     <!-- Add Admin Button -->
-    <a href="{{ route('admin.admins.create') }}" class="btn btn-add">Add Admin</a>
+    <a href="{{ route('admin.admins.create') }}" class="btn btn-primary">Add Admin</a>
 
     <!-- Admins Table -->
-    <table id="admins-table" class="table table-striped">
+    <table id="admins-table" class="common-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -32,13 +31,13 @@
                         <form action="{{ route('admin.admins.edit', $admin->id) }}" method="POST">
                             @csrf
                             @method('GET')
-                            <button type="submit" class="btn btn-warning">Edit</button>
+                            <button type="submit" class="btn" style="background-color:#484848; color:#fff;">Edit</button>
                         </form>
-
+    
                         <form action="{{ route('admin.admins.destroy', $admin->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="btn btn-delete" onclick= "confirmDelete(this)">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick= "confirmDelete(this)">Delete</button>
                         </form>
                         </div>
                     </td>

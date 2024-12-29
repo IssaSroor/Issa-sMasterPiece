@@ -20,7 +20,7 @@
                 <input type="file" id="image" name="category_image" class="form-control-file">
             </div>
 
-            <button type="submit" class="btn btn-success" style="width: 97.4%">Create Category</button>
+            <button type="submit" class="btn btn-primary" style="width: 97.4%">Create Category</button>
             @if($errors->any())
     <div class="alert alert-danger">
         <ul>

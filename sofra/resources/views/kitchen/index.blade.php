@@ -20,12 +20,12 @@
     </div>
 
     <!-- Kitchens List -->
-    <div class="container my-4">
-        <div class="row g-3">
+    <div class="container ">
+        <div class="row">
             @foreach ($kitchens as $kitchen)
                 <div class="col-md-4 col-sm-6">
                     <a href="{{ route('kitchen.show', $kitchen->id) }}" class="text-decoration-none text-dark">
-                        <div class="card h-100 shadow-sm">
+                        <div class="card">
                             <!-- Image Section -->
                             <img 
                                 src="{{ asset($kitchen->kitchen_image) }}" 

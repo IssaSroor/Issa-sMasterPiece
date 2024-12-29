@@ -6,7 +6,7 @@
     <!-- Hero Slider -->
     <section id="hero-slider">
         <div class="slider-container">
-            <div class="slider">
+            <div class="sliderr">
                 <!-- Slide 1 -->
                 <div class="slide" style="background-image: url('{{ asset('images/slider22.jpg') }}');">
                     <div class="overlay">
@@ -47,7 +47,7 @@
     <!-- Popular Kitchens Section -->
     <div class="container">
     <section id="new-kitchens" class="section">
-        <h3>Popular Kitchens</h3>
+        <h2>Popular Kitchens</h2>
         <div class="kitchen-grid">
             @foreach($popularKitchens as $kitchen)
             <div class="kitchen-card1">

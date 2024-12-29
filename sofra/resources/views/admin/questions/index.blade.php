@@ -7,11 +7,10 @@
 @section('content')
     <div class="container">
         <div class="section">
-            <h2 class="section-title">Contact Questions</h2>
-            @if(session('success'))
+            @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <table class="styled-table">
+            <table class="common-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -44,6 +43,7 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 @endsection

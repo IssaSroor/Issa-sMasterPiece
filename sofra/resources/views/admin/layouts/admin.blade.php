@@ -7,7 +7,8 @@
     <title>@yield('title', 'Admin Dashboard')</title>
 
     <!-- Add Admin-specific CSS -->
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/admin.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/admin1.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
@@ -15,7 +16,7 @@
 
 <body>
     <!-- Admin Sidebar -->
-    <aside class="admin-sidebar">
+    <aside class="admin-sidebar col-3">
         <nav>
             <ul>
                 <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
@@ -30,6 +31,10 @@
             </ul>
         </nav>
     </aside>
+    <button class="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay"></div>
 
     <!-- Main Content -->
     <main class="admin-main-content">
@@ -43,7 +48,7 @@
             </div>
         </header>
 
-        <section class="admin-content">
+        <section class="admin-content col-9">
             @yield('content')
         </section>
     </main>
@@ -114,6 +119,18 @@
                 }
             });
         }
+    </script>
+
+    <script>
+        document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+            document.querySelector('.admin-sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        });
+
+        document.querySelector('.sidebar-overlay').addEventListener('click', () => {
+            document.querySelector('.admin-sidebar').classList.remove('active');
+            document.querySelector('.sidebar-overlay').classList.remove('active');
+        });
     </script>
 </body>
 

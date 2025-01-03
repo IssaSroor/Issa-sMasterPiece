@@ -4,7 +4,7 @@
 <h1>Messages</h1>
 
 <!-- Table to display the messages -->
-<table id="messages-table" class="table table-striped table-bordered">
+<table id="messages-table" class="common-table">
     <thead>
         <tr>
             <th>Customer Name</th>

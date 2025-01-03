@@ -26,7 +26,7 @@
                 <select name="order_status" id="order_status" class="form-control">
                     <option value="confirmed" {{ $order->order_status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
                     <option value="prepared" {{ $order->order_status == 'prepared' ? 'selected' : '' }}>Prepared</option>
-                    <option value="on delivery" {{ $order->order_status == 'on delivery' ? 'selected' : '' }}>On Delivery</option>
+                    <option value="delivered" {{ $order->order_status == 'delivered' ? 'selected' : '' }}>Delivered</option>
                 </select>
             </div>
 

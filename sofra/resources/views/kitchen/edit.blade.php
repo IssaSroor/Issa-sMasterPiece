@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="button">Save Changes</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
             </form>
         </div>

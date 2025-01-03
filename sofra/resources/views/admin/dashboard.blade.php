@@ -33,7 +33,9 @@
             </div>
             <div class="stat-card">
                 <h3>Top Performing Kitchen</h3>
+                @if ($topKitchens->count() > 0)
                 <p>{{ $topKitchens->first()->kitchen_name }}</p>
+                @endif
             </div>
             <div class="stat-card">
                 <h3>Average Kitchen Rating</h3>

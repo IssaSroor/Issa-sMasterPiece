@@ -114,7 +114,6 @@ class KitchenController extends Controller
 
         $averageRating = DB::table('kitchen_reviews')
             ->where('kitchen_id', $id)
-            ->where('review_status', '=', 'approved')
             ->avg('review_rating');
 
             $bestSellers = DB::table('order_items')
@@ -174,7 +173,7 @@ class KitchenController extends Controller
         $imagePath = $request->file('kitchen_image')->store('kitchens', 'public');
 
         // Save kitchen data
-        Kitchen::create([
+        $kitchen = Kitchen::create([
             'owner_id' => auth()->guard('owner')->user()->getAuthIdentifier(),
             'kitchen_name' => $request->kitchen_name,
             'kitchen_short_desc' => $request->kitchen_short_desc,
@@ -185,7 +184,7 @@ class KitchenController extends Controller
             'time_for_delivery' => $request->time_for_delivery,
         ]);
 
-        return redirect()->route('owner.dashboard')->with('success', 'Kitchen registered successfully! Await approval.');
+        return redirect()->route('owner.profile', ['id' => $kitchen->id])->with('success', 'Kitchen registered successfully! Await approval.');
     }
 
     public function profile($id)
@@ -199,7 +198,7 @@ class KitchenController extends Controller
 
         $orders = Order::where('kitchen_id', $kitchenId)
             ->where('order_status', $filter)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->get();
 
         $kitchen = Kitchen::findOrFail($kitchenId);
@@ -289,58 +288,79 @@ class KitchenController extends Controller
         return view('kitchen.items.add-item', compact('kitchen', 'categories'));
     }
     public function storeItem(Request $request, $id)
-    {
-        $kitchen = Kitchen::findOrFail($id);
+{
+    $kitchen = Kitchen::findOrFail($id);
 
-        if (auth()->id() !== $kitchen->owner_id) {
-            abort(403, 'Unauthorized action.');
-        }
+    // Check if the logged-in user is the owner of the kitchen
+    if (auth()->id() !== $kitchen->owner_id) {
+        return redirect()->back()->withErrors(['unauthorized' => 'Unauthorized action.']);
+    }
 
-        $validatedData = $request->validate([
-            'item_name' => 'required|string|max:255',
-            'item_description' => 'required|string|max:255',
-            'item_price' => 'required|numeric|min:0',
-            'item_image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+    // Validate the request data
+    $validatedData = $request->validate([
+        'item_name' => 'required|string|max:255',
+        'item_description' => 'required|string|max:255',
+        'item_price' => 'required|numeric|min:0',
+        'item_image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+        'category_id' => 'required|exists:categories,id',
+    ]);
 
-        if ($request->hasFile('item_image')) {
+    // Handle image upload if exists
+    if ($request->hasFile('item_image')) {
+        try {
             $imagePath = $request->file('item_image')->store('items', 'public');
             $validatedData['item_image'] = $imagePath;
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['item_image' => 'Failed to upload image. Please try again.']);
         }
+    }
 
-        $validatedData['kitchen_id'] = $kitchen->id;
+    $validatedData['kitchen_id'] = $kitchen->id;
 
-        // Create the item
+    // Create the item
+    try {
         $foodItem = Food_item::create($validatedData);
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['database' => 'Failed to add item. Please try again.']);
+    }
 
-        // Store the item_id and kitchen_id in kitchen_food_items table
+    // Store the item_id and kitchen_id in kitchen_food_items table
+    try {
         DB::table('kitchen_food_items')->insert([
             'item_id' => $foodItem->id,
             'kitchen_id' => $kitchen->id,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['database' => 'Failed to link item with kitchen. Please try again.']);
+    }
 
-        // Check if the category exists in kitchen_categories for the kitchen
-        $categoryExists = DB::table('kitchen_categories')
-            ->where('kitchen_id', $kitchen->id)
-            ->where('category_id', $validatedData['category_id'])
-            ->exists();
+    // Check if the category exists in kitchen_categories for the kitchen
+    $categoryExists = DB::table('kitchen_categories')
+        ->where('kitchen_id', $kitchen->id)
+        ->where('category_id', $validatedData['category_id'])
+        ->exists();
 
-        if (!$categoryExists) {
-            // Insert into kitchen_categories table
+    if (!$categoryExists) {
+        // Insert into kitchen_categories table
+        try {
             DB::table('kitchen_categories')->insert([
                 'kitchen_id' => $kitchen->id,
                 'category_id' => $validatedData['category_id'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['database' => 'Failed to add category to kitchen. Please try again.']);
         }
-
-        return redirect()->route('kitchen.items', $kitchen->id)
-            ->with('success', 'Item added successfully!');
     }
+
+    // Redirect back with success message
+    return redirect()->route('kitchen.items', $kitchen->id)
+        ->with('success', 'Item added successfully!');
+}
+
 
 
 
@@ -379,7 +399,8 @@ class KitchenController extends Controller
         $categories = Category::all();
 
         // Start query to fetch items for the given kitchen
-        $menuItemsQuery = Food_item::where('kitchen_id', $kitchenId);
+        $menuItemsQuery = Food_item::where('kitchen_id', $kitchenId)
+        ->where('item_availability', 'available');
 
         // Apply search filter if search query is provided
         if ($request->has('search') && !empty($request->input('search'))) {

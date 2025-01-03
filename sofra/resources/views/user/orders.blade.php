@@ -9,6 +9,7 @@
                 <thead>
                     <tr>
                         <th>Order ID</th>
+                        <th>Kitchen Name</th>
                         <th>Date</th>
                         <th>Total</th>
                         <th>Status</th>
@@ -20,6 +21,7 @@
                         {{-- @dd($orders); --}}
                         <tr>
                             <td>{{ $order->id }}</td>
+                            <td>{{ $order->kitchen->kitchen_name }}</td>
                             <td>{{ $order->created_at->format('d-m-Y') }}</td>
                             <td>{{ $order->order_total_amount }} JD</td>
                             <td>{{ $order->order_status }}</td>
